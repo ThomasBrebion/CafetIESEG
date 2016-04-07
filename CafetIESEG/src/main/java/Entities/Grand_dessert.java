@@ -4,7 +4,6 @@ public class Grand_dessert {
 
 	private String nom;
 	private double prix;
-private double poids;
 	
 	public Grand_dessert(String nom,double prix){
 		super();
