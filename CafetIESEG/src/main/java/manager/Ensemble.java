@@ -73,6 +73,14 @@ public class Ensemble {
 	public void supprimerProduit(String nom) {
 	}
 	
+	public void majProduit(Produits produit) {
+		produitsDao.majProduit(produit);
+	}
+	
+	public void supprimerProduit(int id) {
+		produitsDao.supprimerProduit(id);
+	}
+	
 	public List<Grand_dessert> listerGrand_dessert() {
 		return grand_dessertDao.listerGrand_dessert();
 	}
@@ -176,9 +184,13 @@ public class Ensemble {
 	public Article ajouterArticle(Article article) {
 		return articleDao.ajouterArticle(article);
 	}
+	
+	public void supprimerArticle(int id) {
+		articleDao.supprimerArticle(id);
+	}
 
-	public void supprimerArticle(String titre) {
-		
+	public void majArticle(Article article) {
+		articleDao.majArticle(article);
 	}
 
 	public void supprimerBoisson(String nom) {
@@ -202,11 +214,6 @@ public class Ensemble {
 	}
 
 	public void supprimerPlatChaud(String nom) {
-		
-	}
-
-	public void mettreAjourProduit(String nom, Integer quantite) {
-		// TODO Auto-generated method stub
 		
 	}
 

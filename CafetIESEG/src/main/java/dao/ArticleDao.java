@@ -12,4 +12,6 @@ public interface ArticleDao {
 	public Article ajouterArticle(Article article);
 	
 	public void supprimerArticle(int id);
+	
+	public void majArticle(Article article);
 }

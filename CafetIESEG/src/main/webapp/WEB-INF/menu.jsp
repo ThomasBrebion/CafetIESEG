@@ -55,7 +55,15 @@
     <!-- Menu de navigation -->
     <c:import url="nav.jsp">
 	    <c:param name="pageSelectionnee" value="menu"/>
-	</c:import> 
+	</c:import>
+	
+	<div id="JSONlisteBoissons" style="display:none;"><c:out value="${JSONlisteBoissons}" escapeXml="false" /></div>
+    <div id="JSONlisteGrand_dessert" style="display:none;"><c:out value="${JSONlisteGrand_dessert}" escapeXml="false" /></div>
+    <div id="JSONlistePetit_dessert" style="display:none;"><c:out value="${JSONlistePetit_dessert}" escapeXml="false" /></div>
+    <div id=JSONlistePlat_chauds style="display:none;"><c:out value="${JSONlistePlat_chauds}" escapeXml="false" /></div>
+    <div id="JSONlisteSalades" style="display:none;"><c:out value="${JSONlisteSalades}" escapeXml="false" /></div>
+    <div id="JSONlisteSandwichs" style="display:none;"><c:out value="${JSONlisteSandwichs}" escapeXml="false" /></div>
+    <div id="JSONlistePlats" style="display:none;"><c:out value="${JSONlistePlats}" escapeXml="false" /></div>
     
     <div align="center" class="container">
     <div class="row">
@@ -70,7 +78,7 @@
 
        <form>
        		<h3><fmt:message key="plat"/> : </h3>
-	       <select id="choix">
+	       	<select onchange="menuChanged()" id="selectPlat_chauds">
 			  <optgroup label="<fmt:message key="platchaud"/>">
 			  
 			  	<c:forEach var="plat_chaud" items="${listePlat_chauds}">
@@ -103,7 +111,7 @@
 			</select>
 			
        		<h3><fmt:message key="petitdessert"/> : </h3>
-			<select>
+			<select onchange="menuChanged()" id="selectPetit_dessert">
 			  
 			  	<c:forEach var="petit_dessert" items="${listePetit_dessert}">
                     		
@@ -114,7 +122,7 @@
 			</select>
 			  
 			<h3><fmt:message key="granddessert"/> : </h3>
-			<select>
+			<select onchange="menuChanged()" id="selectGrand_dessert">
 			  
 			  	<c:forEach var="grand_dessert" items="${listeGrand_dessert}">
                     		
@@ -125,7 +133,7 @@
 			</select>
 			
        		<h3><fmt:message key="boisson"/> : </h3>
-			<select>
+			<select onchange="menuChanged()" id="selectBoissons">
 			
 				<c:forEach var="boisson" items="${listeBoissons}">
                     		
@@ -135,17 +143,9 @@
                     		
 			</select>
 			
-			
-			<script>
-				var selectElmt = document.getElementById("choix");
-				var textselectionne = selectElmt.options[selectElmt.selectedIndex].text;
-				String choix = textselectionne;
-				double prix = getPlat(choix).getPrix();
-			</script>
-			
 		</form>
 		
-		<h2><fmt:message key="text.prix.menu"/>${plat_chaud.prix} €</h2>
+		<h2><fmt:message key="text.prix.menu"/><span id="prixFinal">${plat_chaud.prix}</span> €</h2>
 
     </div>
     </div>
@@ -161,6 +161,9 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    
+    <!-- Money Counter -->
+    <script src="js/moneyCounter.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

@@ -79,23 +79,35 @@
                     		
                     		<tr class="tr">
                     			<td class="td">${produits.nom}</td>
-								<td><fmt:formatDate value="${produits.date}" pattern="d MMMM yyyy"/></td>
+								<td><fmt:formatDate value="${produits.date}" pattern="d MMMM yyyy"/> 
+								
+								<c:if test="${ produits.days_left <= 2 }"><span style="color:red"></c:if>
+								( <c:if test="${ produits.days_left <= 2 }"><b><fmt:message key="attention"/></b></c:if> ${produits.days_left} <fmt:message key="jours"/>)
+								<c:if test="${ produits.days_left <= 2 }"></span></c:if>
+								</td>
                     			<td class="td">${produits.quantite}</td>
                     			<td class="td">${produits.prix} €</td>
-                    			<td class="td"><a href="" class="glyphicon glyphicon-edit"></a></td>
-                    			<td class="td"><a href="" class="glyphicon glyphicon-trash"></a></td>
+                    			<td class="td"><a href="
+                    				<c:url value="modifierProduit">
+  										<c:param name="produitId" value="${produits.id}"/>
+										</c:url>" class="glyphicon glyphicon-edit"></a></td>
+                    			<td class="td"><a href="
+                    				<c:url value="supprimerProduit">
+  										<c:param name="askProduitId" value="${produits.id}"/>
+										</c:url>
+										" class="glyphicon glyphicon-trash"></a></td>
                     		</tr>
                     		
                     		</c:forEach>
                     		
                     	</table>
      
-     	<h3 align="center"><A href="javascript:ouvre_popup('supprimer')">Supprimer un produit</A></h3>
+     	<!--<h3 align="center"><A href="javascript:ouvre_popup('supprimer')">Supprimer un produit</A></h3>
 		<SCRIPT>
 		   function ouvre_popup(page) {
 		       window.open(page,"Supprimer produit","menubar=no, status=no, menubar=no, width=600, height=500");
 		   }
-		</SCRIPT>
+		</SCRIPT>-->
 		
      	<h3 align="center"><A href="javascript:ouvre_popup('ajout')"><fmt:message key="produit.add"/></A></h3>
 		<SCRIPT>

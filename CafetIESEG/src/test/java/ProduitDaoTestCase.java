@@ -112,7 +112,7 @@ public class ProduitDaoTestCase {
 		int i = ProduitsDao.listerProduits().size();
 		Assert.assertEquals(3,i);
 		
-		ProduitsDao.supprimerProduit("pain");
+		ProduitsDao.supprimerProduit(3);
 		int j = ProduitsDao.listerProduits().size();
 		Assert.assertEquals(2,j);
 		Produits Produits2 = ProduitsDao.listerProduits().get(j-1);
@@ -123,26 +123,19 @@ public class ProduitDaoTestCase {
 	}
 	
 	@Test
-	public void testUpdateQuantiteProduit() throws Exception{
+	public void testUpdateProduit() throws Exception{
 
-		ProduitsDao.mettreAjourQuantiteProduit("viande",2);
-		int j = ProduitsDao.listerProduits().size();
-		Assert.assertEquals(2,j);
-		Produits Produits = ProduitsDao.listerProduits().get(j-2);
-		Assert.assertEquals("viande", Produits.getNom());
-		Assert.assertEquals(2, Produits.getQuantite());
-		
-	}
-	
-	@Test
-	public void testUpdatePrixProduit() throws Exception{
-
-		ProduitsDao.mettreAjourPrixProduit("poisson",29.3);
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.set(2016, Calendar.SEPTEMBER, 2, 0, 0, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Produits prod = new Produits(2,"poisson",50,cal.getTime(),4.9);
+		ProduitsDao.majProduit(prod);
 		int j = ProduitsDao.listerProduits().size();
 		Assert.assertEquals(2,j);
 		Produits Produits = ProduitsDao.listerProduits().get(j-1);
 		Assert.assertEquals("poisson", Produits.getNom());
-		Assert.assertEquals(29.3, Produits.getPrix(),0);
+		Assert.assertEquals(4.9, Produits.getPrix(),0);
+		Assert.assertEquals(50, Produits.getQuantite(),0);
 		
 	}
 }

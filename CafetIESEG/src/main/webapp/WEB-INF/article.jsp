@@ -87,7 +87,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-offset-2 col-sm-10">
-							<a class="btn btn-default" href="accueil">Retour à l'accueil</a>
+							<a class="btn btn-default" href="accueil"><fmt:message key="article.accueil"/></a>
 						</div>
 					</div>
 				</div>

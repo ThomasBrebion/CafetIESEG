@@ -9,11 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Instant;
+
 import Entities.Produits;
 import dao.ProduitsDao;
 
 public class ProduitsDaoImpl implements ProduitsDao {
-
+	
 	@Override
 	public List<Produits> listerProduits() {
 		List<Produits> listeDeProduits = new ArrayList<>();
@@ -24,8 +28,10 @@ public class ProduitsDaoImpl implements ProduitsDao {
 			ResultSet resultSet = stmt
 					.executeQuery("SELECT * FROM produits ORDER BY id");
 			while (resultSet.next()) {
-				listeDeProduits.add(new Produits(resultSet.getInt("id"), resultSet.getString("nom"),resultSet.getInt("quantite"),
-						resultSet.getDate("date_peremption"), resultSet.getDouble("prix")));
+				Produits produit = new Produits(resultSet.getInt("id"), resultSet.getString("nom"),resultSet.getInt("quantite"),
+						resultSet.getDate("date_peremption"), resultSet.getDouble("prix"));
+						produit.setDays_left(Days.daysBetween(new Instant(), new DateTime(produit.getDate())).getDays());
+						listeDeProduits.add(produit);
 			}
 			stmt.close();
 			connection.close();
@@ -81,14 +87,13 @@ public class ProduitsDaoImpl implements ProduitsDao {
 	}
 	
 	@Override
-	public void supprimerProduit(String nom) {
+	public void supprimerProduit(int id) {
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `produits` WHERE `nom`=?");
-			stmt.setString(1, nom);
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `produits` WHERE `id`=?");
+			stmt.setInt(1, id);
 			stmt.executeUpdate();
-				
 			stmt.close();
 			connection.close();
 		} catch(SQLException e){
@@ -97,37 +102,21 @@ public class ProduitsDaoImpl implements ProduitsDao {
 	}
 	
 	@Override
-	public void mettreAjourQuantiteProduit(String nom, Integer quantite) {
+	public void majProduit(Produits produit) {
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("UPDATE `produits` SET `quantite`=? WHERE `nom`=?");
-			stmt.setInt(1, quantite);
-			stmt.setString(2, nom);
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `produits` SET nom = ?, date_peremption = ?, quantite = ?, prix = ? WHERE `id`=?");
+			stmt.setString(1, produit.getNom());
+			stmt.setDate(2, new java.sql.Date(produit.getDate().getTime()));
+			stmt.setInt(3, produit.getQuantite());
+			stmt.setDouble(4, produit.getPrix());
+			stmt.setInt(5, produit.getId());
 			stmt.executeUpdate();
-				
 			stmt.close();
 			connection.close();
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void mettreAjourPrixProduit(String nom, Double prix) {
-		
-		try{
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("UPDATE `produits` SET `prix`=? WHERE `nom`=?");
-			stmt.setDouble(1, prix);
-			stmt.setString(2, nom);
-			stmt.executeUpdate();
-				
-			stmt.close();
-			connection.close();
-		} catch(SQLException e){
-			e.printStackTrace();
-		}
-	}
-
 }

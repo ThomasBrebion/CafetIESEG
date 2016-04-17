@@ -87,5 +87,23 @@ public class ArticleDaoImpl implements ArticleDao {
 			e.printStackTrace();
 		}		
 		}
+	
+	@Override
+	public void majArticle(Article article) {
+		
+		try{
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `article_text` SET `nom`=?,`text`=?,`auteur`=? WHERE `id`=?");
+			stmt.setString(1, article.getTitre());
+			stmt.setString(2, article.getText());
+			stmt.setString(3, article.getAuteur());
+			stmt.setInt(4, article.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			connection.close();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 
 }

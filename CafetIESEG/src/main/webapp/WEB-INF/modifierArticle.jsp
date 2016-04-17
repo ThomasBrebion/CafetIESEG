@@ -44,17 +44,16 @@
     <c:import url="language.jsp">
 	</c:import>
 
-  	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
-  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
+   <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
-	
+
 	<div class="container">
 	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
-    <c:import url="navprive.jsp">
+    <c:import url="nav.jsp">
 	    <c:param name="pageSelectionnee" value="accueil"/>
 	</c:import>
 	   
@@ -64,40 +63,40 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    	<fmt:message key="supprimer"/> Article
+                    	<fmt:message key="modifier" /> Article
                     </h2>
                     
                     <hr>
 		
-		<c:if test="${not empty message}">
-			<h2>${message}</h2>
-		</c:if>
+		<h2>${message}</h2>
 		
-		
-		<c:if test="${ not empty article }">
-			<h2><fmt:message key="supprimer?"/> article ?</h2>
-			
-			        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">
-                        <strong>${article.titre}</strong>
-                    </h2>
-                    <hr>
-                    
-                    <p>${article.text}</p>
-                   
-                    <hr class="visible-xs">      
-                </div>
-            </div>
-        </div>
-        
-        <form method="post" class="form-horizontal">
-			<input type="hidden" name="id" id="id" value="${article.id}">
-			<input class="btn btn-primary" type="submit" value="Supprimer">
-		</form>
-		</c:if>
+		<c:if test="${ not empty produit }">
+		<form method="post" class="form-horizontal">
+		<input type="hidden" name="id" id="id" value="${article.id}">
+					<div class="form-group">
+						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="titre" /></label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="titre" id="titre" value="${article.nom}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="auteur" /></label>
+						<div class="col-sm-3">
+							<input type="date" class="form-control" name="auteur" id="auteur" value="${article.auteur}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="texte" /></label>
+						<div class="col-sm-3">
+							<input type="date" class="form-control" name="text" id="text" value="${article.text}">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer"/>">
+						</div>
+					</div>
+				</form></c:if>
     </div>
     </div>
     </div>
@@ -112,9 +111,6 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-    
-    <!-- Money Counter -->
-    <script src="js/moneyCounter.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>

@@ -11,9 +11,7 @@ public interface ProduitsDao {
 
 	public Produits ajouterProduit(Produits produits);
 	
-	public void supprimerProduit(String nom);
-
-	public void mettreAjourQuantiteProduit(String nom, Integer quantite);
-
-	public void mettreAjourPrixProduit(String nom, Double prix);
+	public void supprimerProduit(int id);
+	
+	public void majProduit(Produits produit);
 }

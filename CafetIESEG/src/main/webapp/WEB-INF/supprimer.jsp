@@ -30,6 +30,7 @@
 </head>
 
 <body>
+<A HREF="espace"><fmt:message key="deconnecter" /></A>
 <div class="container">
 		<div class="row">
 			<div class="col-md-8">

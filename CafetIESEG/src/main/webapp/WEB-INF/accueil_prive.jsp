@@ -39,18 +39,23 @@
     <c:import url="language.jsp">
 	</c:import>
 
-    <a href="accueilprive"><img id="logo" src="img/logo.jpg" /></a>
+    <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
 	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
-    
-        <div class="container">
-			<a class="img-ieseg" href="http://cafet.ieseg.fr/"><img class="img-ieseg-img" src="img/restonet.png"/></a>
-			<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
-			<a class="img-ieseg" href="http://www.ieseg.fr/"><img class="img-ieseg-img" src="img/ieseg.png"/></a>
-      		<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-			<div class="fb-like" data-href="https://www.facebook.com/CafetIeseg/?fref=ts" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-		</div>
+
+	<div class="container">
+	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
+	
+	</div>
+	
+    <div class="navbar navbar-default">
+	    <div class="container">
+				<a class="img-ieseg" href="http://cafet.ieseg.fr/"><img class="img-ieseg-img" src="img/restonet.png"/></a>
+				<a class="img-ieseg" href="http://www.ieseg.fr/"><img class="img-ieseg-img" src="img/ieseg.png"/></a>
+				<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	   	</div>
+   	</div>
    	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
@@ -126,12 +131,17 @@
 
                     <a href="articleprive?id=${articles.id}" title="${articles.titre}"><span class="glyphicon glyphicon-search"></span></a>                    
 
-        <a href="javascript:ouvre_popup('supprimerArticle')" class="glyphicon glyphicon-trash" ></a>
-		<SCRIPT>
-		   function ouvre_popup(page) {
-		       window.open(page,"Supprimer Article","menubar=no, status=no, menubar=no, width=600, height=500");
-		   }
-		</SCRIPT>
+        <a href="
+        <c:url value="supprimerArticle">
+  			<c:param name="id" value="${articles.id}"/>
+		</c:url>
+        " class="glyphicon glyphicon-trash" ></a>
+        
+        <a href="
+        <c:url value="modifierArticle">
+  			<c:param name="id" value="${articles.id}"/>
+		</c:url>
+        " class="glyphicon glyphicon-edit" ></a>
                     
                 </div>
             </div>

@@ -9,6 +9,7 @@ public class Produits {
 	private int quantite;
 	private Date date;
 	private double prix;
+	private int days_left;
 	
 	public Produits(int id,String nom,int quantite,Date date,double prix){
 		super();
@@ -50,6 +51,16 @@ public class Produits {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+
+	public int getDays_left() {
+		return days_left;
+	}
+
+
+	public void setDays_left(int days_left) {
+		this.days_left = days_left;
 	}
 
 }

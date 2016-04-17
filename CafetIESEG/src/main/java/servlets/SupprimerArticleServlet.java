@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,29 +19,69 @@ public class SupprimerArticleServlet extends GenericServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
+		boolean problem = false;
 
-		List<Article> articles = Ensemble.getInstance().listerArticles();
-		request.setAttribute("listeArticles", articles);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerArticle.jsp");
-		view.forward(request, response);
+		String value = request.getParameter("id");
+		int id = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				id = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			boolean asksConfirmation = false;
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\" / Problem with the parameter GET : \"" + value + "\"";
+			}
+			else
+			{
+				Article article = Ensemble.getInstance().getArticle(id);
+				request.setAttribute("article", article);	
+			}
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerArticle.jsp");
+			view.forward(request, response);
+		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String titre = request.getParameter("titre");
+		boolean problem = false;
 
-		if (this.isNullOrEmpty(titre)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("supprimerArticle");
-			} else {
-			Ensemble.getInstance().supprimerArticle(titre);
-			response.sendRedirect("modificationOK");
+		String value = request.getParameter("id");
+		int id = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				id = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			boolean asksConfirmation = false;
+			if (problem)
+			{
+				message = "Probleme avec le parametre POST : \"" + value + "\"";
+			}
+			else
+			{
+				Ensemble.getInstance().supprimerArticle(id);
+				message = "Article supprime";
+			}
+			request.setAttribute("message", message);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerArticle.jsp");
+			view.forward(request, response);
 		}
-		
-		
 	}
 
 

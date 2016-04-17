@@ -44,18 +44,18 @@
     <c:import url="language.jsp">
 	</c:import>
 
-  	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
-  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
+   	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
+   	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
-	
+
 	<div class="container">
-	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espace"><input type="Button" value="Espace Privé" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
-	    <c:param name="pageSelectionnee" value="accueil"/>
+	    <c:param name="pageSelectionnee" value="menu"/>
 	</c:import>
 	   
     <div align="center" class="container">
@@ -64,39 +64,17 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    	<fmt:message key="supprimer"/> Article
+                    	Supprimer Produit
                     </h2>
                     
                     <hr>
 		
-		<c:if test="${not empty message}">
-			<h2>${message}</h2>
-		</c:if>
+		<h2>${message}</h2>
 		
-		
-		<c:if test="${ not empty article }">
-			<h2><fmt:message key="supprimer?"/> article ?</h2>
-			
-			        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">
-                        <strong>${article.titre}</strong>
-                    </h2>
-                    <hr>
-                    
-                    <p>${article.text}</p>
-                   
-                    <hr class="visible-xs">      
-                </div>
-            </div>
-        </div>
-        
-        <form method="post" class="form-horizontal">
-			<input type="hidden" name="id" id="id" value="${article.id}">
-			<input class="btn btn-primary" type="submit" value="Supprimer">
-		</form>
+		<c:if test="${ confirmation == true }">
+		<a href="<c:url value="supprimerProduit">
+  					<c:param name="produitId" value="${produitId}"/>
+				</c:url>"><input type="Button" value="Confirmer" aria-label="Confirmer"/></a>
 		</c:if>
     </div>
     </div>
