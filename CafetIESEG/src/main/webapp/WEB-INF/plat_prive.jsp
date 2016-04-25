@@ -45,7 +45,7 @@
 	</c:import>
 	
     <a href="accueilprive"><img id="logo" src="img/logo.jpg" /></a>
-	<A HREF="espace"><fmt:message key="footer"/></A>
+	<A HREF="espace"><fmt:message key="deconnecter"/></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
@@ -64,11 +64,11 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                     
-                    <h1 class="brand-name"><fmt:message key="plat.titre"/></h1>
+                    <h1 class="brand-name"><fmt:message key="platchaud.titre"/></h1>
 
 					<hr class="tagline-divider">
                    
-				   <h3><fmt:message key="plat.text1"/></h3><h4><fmt:message key="plat.text2"/></h4>
+				   <h3><fmt:message key="platchaud.text1"/></h3><h4><fmt:message key="platchaud.text2"/></h4>
 				   
                     <hr class="tagline-divider2">
                     

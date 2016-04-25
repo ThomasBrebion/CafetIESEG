@@ -67,34 +67,35 @@
 		<div class="box">
 			<div class="row">
 				<div class="col-md-12">
-					<h3><fmt:message key="article.detail"/></h3>
+					<h3 align="center"><fmt:message key="article.detail"/></h3>
+					
+					<hr>
 	
-					<div class="row">
+					<div align="center" class="row">
 						<label class="col-sm-2 control-label"><fmt:message key="titre"/></label>
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<p>${article.titre}</p>
 						</div>
 					</div>
-					<div class="row">
+					<div align="center" class="row">
 						<label class="col-sm-2 control-label"><fmt:message key="auteur"/></label>
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<p>${article.auteur}</p>
 						</div>
 					</div>
-					<div class="row">
+					<div align="center" class="row">
 						<label class="col-sm-2 control-label"><fmt:message key="texte"/></label>
-						<div class="col-sm-10">
+						<div class="col-sm-8">
 							<p>${article.text}</p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-offset-2 col-sm-10">
+					<div align="center" class="row">
+						<div class="col-sm-offset-2 col-sm-8">
 							<a class="btn btn-default" href="accueilprive"><fmt:message key="article.accueil"/></a>
 						</div>
 					</div>
 				</div>
 			</div>
-	
 		</div>
 	</div>
 	

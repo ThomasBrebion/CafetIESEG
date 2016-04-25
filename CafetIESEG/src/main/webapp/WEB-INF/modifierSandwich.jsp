@@ -71,21 +71,21 @@
 		<form method="post" class="form-horizontal"  accept-charset="ISO-8859-1">
 		<input type="hidden" name="id" id="id" value="${article.id}">
 					<div class="form-group">
-						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="titre" /></label>
+						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="nom" /></label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="titre" id="titre" value="${article.titre}">
+							<input type="text" class="form-control" name="nom" id="nom" value="${sandwich.nom}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label"><fmt:message key="auteur" /></label>
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="prix_solo" /></label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="auteur" id="auteur" value="${article.auteur}">
+							<input type="number" class="form-control" name="prix_solo" id="prix_solo" value="${sandwich.prix_solo}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label"><fmt:message key="texte" /></label>
-						<div class="col-sm-9">
-							<textarea name="text" cols="120" rows="5">${article.text}</textarea>
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="prix_menu" /></label>
+						<div class="col-sm-3">
+							<input type="number" class="form-control" name="prix_menu" id="prix_menu" value="${sandwich.prix_menu}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -93,7 +93,8 @@
 							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer"/>">
 						</div>
 					</div>
-				</form></c:if>
+				</form>
+				</c:if>
     </div>
     </div>
     </div>

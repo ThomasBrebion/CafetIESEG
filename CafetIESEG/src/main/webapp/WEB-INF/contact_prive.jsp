@@ -97,38 +97,89 @@
                         
                     </h2>
                     <hr>
-                    <form action="mailto:thomas.brebion@hei.fr" method=POST enctype="text/plain">
+                    
+           <script>
+<!--
+function Email() {
+
+  var dest_email = document.contact.dest_email.value;
+  var email = document.contact.email.value;
+  var numero = document.contact.numero.value;
+  var nom = document.contact.nom.value;
+  var prenom = document.contact.prenom.value;
+  var sujet = document.contact.sujet.value; 
+  var message = document.contact.message.value; 
+
+  if ((nom == "") || (nom == "undefined")) {
+    alert("Renseignez votre nom.");
+    document.modulo.nom.focus();
+  }
+  if ((prenom == "") || (prenom == "undefined")) {
+	 alert("Renseignez votre prénom.");
+	 document.modulo.prenom.focus();
+}
+  else if ((email.indexOf("@") == (-1)) || (email == "") || (email == "undefined")) {
+    alert("Entrez un mail valide.");
+    document.modulo.email.focus();
+  }
+  else if ((numero == "") || (numero == "undefined")) {
+    alert("Entrez votre numéro de téléphone.");
+    document.modulo.numero.focus();
+  }
+  else if ((sujet == "") || (sujet == "undefined")) {
+    alert("Choisissez un sujet.");
+    document.modulo.sujet.focus();
+  }
+  else if ((message == "") || (message == "undefined")) {
+    alert("Renseignez un message.");
+    document.modulo.message.focus();
+  }else{
+    location.href = "mailto:" + dest_email + "?Subject=" + sujet + "&Body= " + message + " %0A%0A  " + nom + " " + prenom + " %0A " + email + " %0A " + numero + " ";
+  }
+}
+//-->
+</script>  
+
+					<form name="contact">
                         <div class="row">
-                        	<div class="form-group col-lg-6">
-                                <label>Sujet</label><br>
-                                <input class="marge" type="radio" name="subject" value="renseignement">Renseignement
-                                <input class="marge" type="radio" name="subject" value="commentaire">Commentaire
-                                <input class="marge" type="radio" name="subject" value="actualité">Actualité
-                                <input class="marge" type="radio" name="subject" value="sponsor">Sponsor
+                        	<div class="form-group col-lg-2">
+                                <label><fmt:message key="sujet"/></label><br>
+                                
+								<select name="sujet">
+								   <option value="<fmt:message key="renseignement"/>"><fmt:message key="renseignement"/>
+								   <option value="<fmt:message key="commentaire"/>" selected><fmt:message key="commentaire"/>
+								   <option value="<fmt:message key="actualite"/>"><fmt:message key="actualite"/>
+								   <option value="Sponsor">Sponsor
+								</select>
+
                             </div>
+							<input type="hidden" name="dest_email" value="thomas.brebion@hei.fr">
                             <div class="form-group col-lg-2">
                                 <label><fmt:message key="name"/></label>
-                                <input type="text" name="nom" class="form-control">
+                                <input type="text" id="nom" name="nom" class="form-control">
                             </div>
                             <div class="form-group col-lg-2">
+                                <label><fmt:message key="prenom"/></label>
+                                <input type="text" id="prenom" name="prenom" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-3">
                                 <label>Mail</label>
-                                <input required type="email" name="mail" class="form-control">
+                                <input required type="email" id="email" name="email" class="form-control">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label><fmt:message key="phonenumber"/></label>
-                                <input type="tel" class="form-control" name="numero" placeholder="XX XX XX XX XX">
+                                <input type="tel" class="form-control" id="numero" name="numero" placeholder="XX XX XX XX XX">
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group col-lg-12">
                                 <label>Message</label>
-                                <textarea required class="form-control" name="message" rows="6"></textarea>
+                                <textarea required class="form-control" id="message" name="message" rows="6"></textarea>
                             </div>
-                            <div class="form-group col-lg-12">
-                                <input type="hidden">
-                                <button type="submit" class="btn btn-default"><fmt:message key="envoyer"/></button>
+	                            <div class="form-group col-lg-12">
+								<input type="button" value="Envoyer" onClick="Email()">
                             </div>
                         </div>
-                    </form>
+                     </form>
 		
                 </div>
             </div>

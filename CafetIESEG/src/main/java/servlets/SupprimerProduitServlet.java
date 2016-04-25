@@ -55,7 +55,7 @@ public class SupprimerProduitServlet extends HttpServlet {
 			else
 			{
 				//Ensemble.getInstance().supprimerProduit(produitId);
-				message = "Voulez-vous supprimer le produit avec l'id " + produitId + " ?";
+				message = "Voulez-vous supprimer le produit avec l'id " + produitId + " ? ";
 				asksConfirmation = true;
 			}
 			request.setAttribute("message", message);

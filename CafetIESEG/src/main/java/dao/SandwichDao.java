@@ -7,9 +7,9 @@ import Entities.Sandwich;
 public interface SandwichDao {
 	public List<Sandwich> listerSandwichs();
 
-	public Sandwich getSandwich(String nom);
+	public Sandwich getSandwich(int id);
 
 	public Sandwich ajouterSandwich(Sandwich sandwich);
 
-	public void supprimerSandwich(String nom);
+	public void supprimerSandwich(int id);
 }

@@ -34,6 +34,15 @@
 
 </head>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <body>
 
     <c:import url="language.jsp">
@@ -43,19 +52,15 @@
 	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
-
-	<div class="container">
-	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
-	
-	</div>
-	
-    <div class="navbar navbar-default">
-	    <div class="container">
-				<a class="img-ieseg" href="http://cafet.ieseg.fr/"><img class="img-ieseg-img" src="img/restonet.png"/></a>
-				<a class="img-ieseg" href="http://www.ieseg.fr/"><img class="img-ieseg-img" src="img/ieseg.png"/></a>
-				<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-	   	</div>
-   	</div>
+    
+    
+        <div class="container">
+			<a class="img-ieseg" href="http://cafet.ieseg.fr/"><img class="img-ieseg-img" src="img/restonet.png"/></a>
+			<a class="img-ieseg" href="http://www.ieseg.fr/"><img class="img-ieseg-img" src="img/ieseg.png"/></a>
+			<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
+			<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<div class="fb-like" data-href="https://www.facebook.com/CafetIeseg/?fref=ts" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+		</div>
    	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
@@ -132,14 +137,14 @@
                     <a href="articleprive?id=${articles.id}" title="${articles.titre}"><span class="glyphicon glyphicon-search"></span></a>                    
 
         <a href="
-        <c:url value="supprimerArticle">
-  			<c:param name="id" value="${articles.id}"/>
-		</c:url>
-        " class="glyphicon glyphicon-trash" ></a>
+        	<c:url value="supprimerArticle">
+  				<c:param name="askArticleId" value="${articles.id}"/>
+			</c:url>
+		" class="glyphicon glyphicon-trash"></a>
         
         <a href="
         <c:url value="modifierArticle">
-  			<c:param name="id" value="${articles.id}"/>
+  			<c:param name="articleId" value="${articles.id}"/>
 		</c:url>
         " class="glyphicon glyphicon-edit" ></a>
                     
@@ -152,12 +157,13 @@
 	            <div class="box">
 	                <div class="col-lg-12">
 		
-		<h3 align="center"><A href="javascript:ouvre_popup('ajoutArticle')"><fmt:message key="article.add" /></A></h3>
-		<SCRIPT>
-		   function ouvre_popup(page) {
-		       window.open(page,"Ajouter Article","menubar=no, status=no, menubar=no, width=600, height=500");
-		   }
-		</SCRIPT>
+		
+        <div  align="center">
+        <h3>Ajouter un article</h3><a href="
+        <c:url value="ajoutArticle">
+		</c:url>
+        " class="glyphicon glyphicon-plus" ></a>
+		</div>
 		
 					</div>
 	            </div>

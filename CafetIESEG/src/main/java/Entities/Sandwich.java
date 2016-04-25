@@ -5,15 +5,25 @@ public class Sandwich {
 	private String nom;
 	private double prix_solo;
 	private double prix_menu;
+	private int id;
 	
-	public Sandwich(String nom,double prix_solo,double prix_menu){
+	public Sandwich(String nom,double prix_solo,double prix_menu, int id){
 		super();
 		this.nom=nom;
 		this.prix_solo=prix_solo;
 		this.prix_menu=prix_menu;
+		this.id=id;
 		
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public double getPrix_solo() {
 		return prix_solo;
 	}

@@ -23,7 +23,7 @@ public class SandwichDaoImpl implements SandwichDao {
 			ResultSet resultSet = stmt
 					.executeQuery("SELECT * FROM sandwich ORDER BY prix_solo");
 			while (resultSet.next()) {
-				listeDeSandwich.add(new Sandwich(resultSet.getString("nom"), resultSet.getDouble("prix_solo"), resultSet.getDouble("prix_menu")));
+				listeDeSandwich.add(new Sandwich(resultSet.getString("nom"), resultSet.getDouble("prix_solo"), resultSet.getDouble("prix_menu"),resultSet.getInt("id")));
 			}
 			stmt.close();
 			connection.close();
@@ -34,15 +34,15 @@ public class SandwichDaoImpl implements SandwichDao {
 	}
 
 	@Override
-	public Sandwich getSandwich(String nom) {
+	public Sandwich getSandwich(int id) {
 		Sandwich sandwich = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM sandwich WHERE nom = ?");
-			stmt.setString(1, nom);
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM sandwich WHERE id = ?");
+			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 			if(resultSet.next()) {
-				sandwich = new Sandwich(resultSet.getString("nom"), resultSet.getDouble("prix_solo"), resultSet.getDouble("prix_menu"));
+				sandwich = new Sandwich(resultSet.getString("nom"), resultSet.getDouble("prix_solo"), resultSet.getDouble("prix_menu"),resultSet.getInt("id"));
 			}			
 			stmt.close();
 			connection.close();
@@ -57,10 +57,11 @@ public class SandwichDaoImpl implements SandwichDao {
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `sandwich`(`nom`,`prix_solo`,`prix_menu`)VALUES(?,?,?);", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `sandwich`(`nom`,`prix_solo`,`prix_menu`,`id`)VALUES(?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, sandwich.getNom());
 			stmt.setDouble(2, sandwich.getPrix_solo());
 			stmt.setDouble(3, sandwich.getPrix_menu());
+			stmt.setDouble(4, sandwich.getId());
 			stmt.executeUpdate();
 			
 			stmt.close();
@@ -85,12 +86,12 @@ public class SandwichDaoImpl implements SandwichDao {
 	}
 
 	@Override
-	public void supprimerSandwich(String nom) {
+	public void supprimerSandwich(int id) {
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `sandwich` WHERE `nom`=?");
-			stmt.setString(1, nom);
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `sandwich` WHERE `id`=?");
+			stmt.setInt(1, id);
 			stmt.executeUpdate();
 				
 			stmt.close();

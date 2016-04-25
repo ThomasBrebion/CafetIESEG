@@ -39,7 +39,7 @@
 		<div class="row">
 			<div class="col-md-8">
 
-				<h3 align="center"><fmt:message key="modifOK"/>Modification bien prise en compte, vous pouvez fermer la fenetre ! :)</h3>
+				<h3 align="center"><fmt:message key="modifOK"/></h3>
 
 			</div>
 		</div>

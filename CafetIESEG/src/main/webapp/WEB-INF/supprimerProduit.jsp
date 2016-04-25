@@ -41,21 +41,18 @@
 
 <body>
 
-    <c:import url="language.jsp">
-	</c:import>
-
    	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
    	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
-	<a href="espace"><input type="Button" value="Espace Privé" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
-	    <c:param name="pageSelectionnee" value="menu"/>
+	    <c:param name="pageSelectionnee" value=""/>
 	</c:import>
 	   
     <div align="center" class="container">
@@ -64,7 +61,7 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    	Supprimer Produit
+                    	<fmt:message key="supprimerProd?"/>
                     </h2>
                     
                     <hr>

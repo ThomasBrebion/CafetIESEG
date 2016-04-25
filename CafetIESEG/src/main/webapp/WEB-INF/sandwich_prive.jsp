@@ -75,22 +75,29 @@
                     <c:forEach var="sandwich" items="${listeSandwichs}">
                     
                    		<h5>${sandwich.nom}</h5><p>${sandwich.prix_solo}€</p>
+                   		
+				        <a href="
+				        	<c:url value="supprimerSandwich">
+				  				<c:param name="askSandwichNom" value="${sandwich.nom}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a>
+				        
+				        <a href="
+				        <c:url value="modifierSandiwch">
+				  			<c:param name="sandwichNom" value="${sandwich.nom}"/>
+						</c:url>
+				        " class="glyphicon glyphicon-edit" ></a>
                     		
                     </c:forEach>
                     
-                    <h3 align="center"><A href="javascript:ouvre_popup('supprimerSandwich')">Supprimer un sandwich</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Supprimer sandwich","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
-					
-			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterSandwich')">Ajouter un sandwich</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Ajout sandwich","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
+                    <hr>
+		
+     	<h3 align="center"><A href="javascript:ouvre_popup('ajoutSandwich')"><fmt:message key="sandwich.add"/></A></h3>
+		<SCRIPT>
+		   function ouvre_popup(page) {
+		       window.open(page,"Ajout sandwich","menubar=no, status=no, menubar=no, width=600, height=500");
+		   }
+		</SCRIPT>
                   
                   <div class="nextandprevious">
                   
@@ -103,12 +110,9 @@
                   </div>
                   
                   </div>
-                  
-                  
-					
-                  </div>
-                  </div>
-                  </div>
+                </div>
+              </div>
+            </div>
 
     </div>
     <!-- /.container -->

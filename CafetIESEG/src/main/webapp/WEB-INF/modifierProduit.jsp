@@ -41,9 +41,6 @@
 
 <body>
 
-    <c:import url="language.jsp">
-	</c:import>
-
    <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
@@ -53,7 +50,7 @@
 	</div>
 	
     <!-- Menu de navigation -->
-    <c:import url="nav.jsp">
+    <c:import url="navprive.jsp">
 	    <c:param name="pageSelectionnee" value="menu"/>
 	</c:import>
 	   

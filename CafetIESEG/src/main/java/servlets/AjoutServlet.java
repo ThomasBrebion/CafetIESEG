@@ -48,20 +48,32 @@ public class AjoutServlet extends GenericServlet {
 		} catch (NumberFormatException e) {
 
 		}
-		
 		int j = Ensemble.getInstance().listerProduits().size();
+
+		boolean bool = true;
+		for(int k=0;k<j;k++){
+			if(nom.equals(Ensemble.getInstance().listerProduits().get(k).getNom())){
+				bool = false;
+			}
+		}
+		
 		if(j!=0){
 		int lastId = Ensemble.getInstance().listerProduits().get(j-1).getId();
 
-		if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {
+
+		
+		if(bool==false){
+			request.getSession().setAttribute("messageErreur0", "Ce produit existe déjà");
+			response.sendRedirect("ajout");
+		} else if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {
 			request.getSession().setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");
 			response.sendRedirect("ajout");
 		} else {
 			Produits nouveauProduit = new Produits(lastId+1,nom, quantite, date, prix);
 			Ensemble.getInstance().ajouterProduit(nouveauProduit);
 			response.sendRedirect("modificationOK");
-			
-		}}
+		}
+			}
 		else{
 			if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {
 				request.getSession().setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");
@@ -73,6 +85,7 @@ public class AjoutServlet extends GenericServlet {
 			}
 			
 		}
+		
 		
 		
 	}

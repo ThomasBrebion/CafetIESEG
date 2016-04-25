@@ -23,17 +23,17 @@ public class SandwichDaoTestCase {
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM `sandwich`");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('3 Fromages', 3, 4.5)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Crabe', 3, 4.5)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Emmental', 2.5, 4)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Jambon', 2.6, 4.2)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Mimolette', 2.5, 4)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Poulet Curry', 3.2, 4.7)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Poulet Mayo', 3.2, 4.7)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Sandwich de la Semaine', 3.2, 4.7)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Thon', 3, 4.5)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Total Beurre', 3, 4.5)");
-		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`) VALUES ('Total Mayo', 3, 4.5)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('3 Fromages', 3, 4.5,1)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Crabe', 3, 4.5,2)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Emmental', 2.5, 4,3)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Jambon', 2.6, 4.2,4)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Mimolette', 2.5, 4,5)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Poulet Curry', 3.2, 4.7,6)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Poulet Mayo', 3.2, 4.7,7)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Sandwich de la Semaine', 3.2, 4.7,8)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Thon', 3, 4.5,9)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Total Beurre', 3, 4.5,10)");
+		stmt.executeUpdate("INSERT INTO `sandwich` (`nom`, `prix_solo`, `prix_menu`,`id`) VALUES ('Total Mayo', 3, 4.5,11)");
 		stmt.close();
 		connection.close();
 	}
@@ -45,14 +45,16 @@ public class SandwichDaoTestCase {
 		Assert.assertEquals("Emmental", Sandwich.get(0).getNom());
 		Assert.assertEquals(2.5, Sandwich.get(0).getPrix_solo(),0);
 		Assert.assertEquals(4, Sandwich.get(0).getPrix_menu(),0);
+		Assert.assertEquals(3, Sandwich.get(0).getId(),0);
 		Assert.assertEquals("Mimolette", Sandwich.get(1).getNom());
 		Assert.assertEquals(2.5, Sandwich.get(1).getPrix_solo(),0);
 		Assert.assertEquals(4, Sandwich.get(1).getPrix_menu(),0);
+		Assert.assertEquals(5, Sandwich.get(1).getId(),0);
 	}
 	
 	@Test
 	public void testGetSandwich() {
-		Sandwich Sandwich = SandwichDao.getSandwich("Thon");
+		Sandwich Sandwich = SandwichDao.getSandwich(9);
 		Assert.assertNotNull(Sandwich);
 		Assert.assertEquals("Thon",Sandwich.getNom());
 		Assert.assertEquals(3,Sandwich.getPrix_solo(),0);
@@ -61,18 +63,19 @@ public class SandwichDaoTestCase {
 	
 	@Test
 	public void testGetSandwichSansResultat() {
-		Sandwich Sandwich = SandwichDao.getSandwich("");
+		Sandwich Sandwich = SandwichDao.getSandwich(0);
 		Assert.assertNull(Sandwich);		
 	}
 	
 	@Test
 	public void testAjouterSandwich() throws Exception {
-		Sandwich Sandwich = new Sandwich("Carbo",1.20,3.5);
+		Sandwich Sandwich = new Sandwich("Carbo",1.20,3.5,12);
 		Sandwich SandwichAjoute = SandwichDao.ajouterSandwich(Sandwich);
 		
 		Assert.assertEquals("Carbo", SandwichAjoute.getNom());
 		Assert.assertEquals(1.20, SandwichAjoute.getPrix_solo(),0);
 		Assert.assertEquals(3.5, SandwichAjoute.getPrix_menu(),0);
+		Assert.assertEquals(12, SandwichAjoute.getId(),0);
 		
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
 		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM `sandwich` WHERE nom = ?");
@@ -82,19 +85,20 @@ public class SandwichDaoTestCase {
 		Assert.assertEquals(SandwichAjoute.getNom(),rs.getString("nom"));
 		Assert.assertEquals(SandwichAjoute.getPrix_solo(),rs.getDouble("prix_solo"),0);
 		Assert.assertEquals(SandwichAjoute.getPrix_menu(),rs.getDouble("prix_menu"),0);
+		Assert.assertEquals(SandwichAjoute.getId(),rs.getInt("id"));
 		Assert.assertFalse(rs.next());
 		connection.close();
 	}
 	
 	@Test
 	public void testSupprimerSandwich() throws Exception {
-		Sandwich Sandwich = new Sandwich("Pomme de terre",2.30,4.3);
+		Sandwich Sandwich = new Sandwich("Pomme de terre",2.30,4.3,13);
 		SandwichDao.ajouterSandwich(Sandwich);
 		
 		int i = SandwichDao.listerSandwichs().size();
 		Assert.assertEquals(12,i);
 		
-		SandwichDao.supprimerSandwich("Pomme de terre");
+		SandwichDao.supprimerSandwich(13);
 		int j = SandwichDao.listerSandwichs().size();
 		Assert.assertEquals(11,j);
 		Sandwich Sandwich2 = SandwichDao.listerSandwichs().get(j-1);

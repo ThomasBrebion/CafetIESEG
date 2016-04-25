@@ -145,8 +145,8 @@ public class Ensemble {
 		return sandwichsDao.listerSandwichs();
 	}
 
-	public Sandwich getSandwichs(String nom) {
-		return sandwichsDao.getSandwich(nom);
+	public Sandwich getSandwichs(int id) {
+		return sandwichsDao.getSandwich(id);
 	}
 
 	public Sandwich ajouterSandwich(Sandwich sandwich) {
@@ -209,7 +209,7 @@ public class Ensemble {
 		
 	}
 
-	public void supprimerSandwich(String nom) {
+	public void supprimerSandwich(int id) {
 		
 	}
 
