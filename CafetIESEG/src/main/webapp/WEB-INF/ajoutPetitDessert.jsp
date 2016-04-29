@@ -44,13 +44,13 @@
 				</c:if>
 				<form method="post" class="form-horizontal">
 					<div class="form-group">
-						<label for="titre" class="col-sm-2 control-label"><fmt:message key="name"/></label>
+						<label for="nom" class="col-sm-2 control-label"><fmt:message key="name"/></label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" name="nom" id="nom">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="texte" class="col-sm-2 control-label"><fmt:message key="prix"/></label>
+						<label for="prix" class="col-sm-2 control-label"><fmt:message key="prix"/></label>
 						<div class="col-sm-3">
 							<input type="text" placeholder="Ex : 2.4" class="form-control" name="prix" id="prix">
 						</div>

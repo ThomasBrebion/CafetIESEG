@@ -2,13 +2,15 @@ package Entities;
 
 public class Grand_dessert {
 
+	private int id;
 	private String nom;
 	private double prix;
 	
-	public Grand_dessert(String nom,double prix){
+	public Grand_dessert(String nom,double prix,int id){
 		super();
 		this.nom=nom;
 		this.prix=prix;
+		this.setId(id);
 		
 	}
 	
@@ -24,6 +26,16 @@ public class Grand_dessert {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

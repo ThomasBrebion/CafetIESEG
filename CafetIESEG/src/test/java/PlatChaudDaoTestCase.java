@@ -23,13 +23,13 @@ public class PlatChaudDaoTestCase {
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM `plat_chaud`");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Croque Baguette Double', 3.5, 4.9)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Croque Baguette Simple', 2.6, 4.2)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Hot-Dog', 2.6, 4.2)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Pasta Box (Bolognaise, Carbonara, 3 Fromages)', 3.5, 4.9)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Pizza', 2.6, 4.2)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Potato Burger', 3.2, 4.7)");
-		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`) VALUES ('Quiche', 2.6, 4.2)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Croque Baguette Double', 3.5, 4.9,1)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Croque Baguette Simple', 2.6, 4.2,2)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Hot-Dog', 2.6, 4.2,3)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Pasta Box (Bolognaise, Carbonara, 3 Fromages)', 3.5, 4.9,4)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Pizza', 2.6, 4.2,5)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Potato Burger', 3.2, 4.7,6)");
+		stmt.executeUpdate("INSERT INTO `plat_chaud`(`nom`,`prix_solo`,`prix_menu`,`id`) VALUES ('Quiche', 2.6, 4.2,7)");
 		stmt.close();
 		connection.close();
 	}
@@ -41,14 +41,16 @@ public class PlatChaudDaoTestCase {
 		Assert.assertEquals("Croque Baguette Simple", Plat_chaud.get(0).getNom());
 		Assert.assertEquals(2.6, Plat_chaud.get(0).getPrix_solo(),0);
 		Assert.assertEquals(4.2, Plat_chaud.get(0).getPrix_menu(),0);
+		Assert.assertEquals(2, Plat_chaud.get(0).getId(),0);
 		Assert.assertEquals("Hot-Dog", Plat_chaud.get(1).getNom());
 		Assert.assertEquals(2.6, Plat_chaud.get(1).getPrix_solo(),0);
 		Assert.assertEquals(4.2, Plat_chaud.get(1).getPrix_menu(),0);
+		Assert.assertEquals(3, Plat_chaud.get(1).getId(),0);
 	}
 	
 	@Test
 	public void testGetPlat_chaud() {
-		Plat_chaud Plat_chaud = Plat_chaudDao.getPlat_chaud("Pizza");
+		Plat_chaud Plat_chaud = Plat_chaudDao.getPlat_chaud(5);
 		Assert.assertNotNull(Plat_chaud);
 		Assert.assertEquals("Pizza",Plat_chaud.getNom());
 		Assert.assertEquals(2.6,Plat_chaud.getPrix_solo(),0);
@@ -57,13 +59,13 @@ public class PlatChaudDaoTestCase {
 	
 	@Test
 	public void testGetPlat_chaudSansResultat() {
-		Plat_chaud Plat_chaud = Plat_chaudDao.getPlat_chaud("");
+		Plat_chaud Plat_chaud = Plat_chaudDao.getPlat_chaud(0);
 		Assert.assertNull(Plat_chaud);		
 	}
 	
 	@Test
 	public void testAjouterPlat_chaud() throws Exception {
-		Plat_chaud Plat_chaud = new Plat_chaud("Carbo",1.20,3.5);
+		Plat_chaud Plat_chaud = new Plat_chaud("Carbo",1.20,3.5,8);
 		Plat_chaud Plat_chaudAjoute = Plat_chaudDao.ajouterPlat_chaud(Plat_chaud);
 		
 		Assert.assertEquals("Carbo", Plat_chaudAjoute.getNom());
@@ -71,26 +73,27 @@ public class PlatChaudDaoTestCase {
 		Assert.assertEquals(3.5, Plat_chaudAjoute.getPrix_menu(),0);
 		
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
-		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM `plat_chaud` WHERE nom = ?");
-		stmt.setString(1, Plat_chaudAjoute.getNom());
+		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM `plat_chaud` WHERE id = ?");
+		stmt.setInt(1, Plat_chaudAjoute.getId());
 		ResultSet rs = stmt.executeQuery();
 		Assert.assertTrue(rs.next());
 		Assert.assertEquals(Plat_chaudAjoute.getNom(),rs.getString("nom"));
 		Assert.assertEquals(Plat_chaudAjoute.getPrix_solo(),rs.getDouble("prix_solo"),0);
 		Assert.assertEquals(Plat_chaudAjoute.getPrix_menu(),rs.getDouble("prix_menu"),0);
+		Assert.assertEquals(Plat_chaudAjoute.getId(),rs.getInt("id"));
 		Assert.assertFalse(rs.next());
 		connection.close();
 	}
 	
 	@Test
 	public void testSupprimerPlat_chaud() throws Exception {
-		Plat_chaud Plat_chaud = new Plat_chaud("Pomme de terre",2.30,4.3);
+		Plat_chaud Plat_chaud = new Plat_chaud("Pomme de terre",2.30,4.3,9);
 		Plat_chaudDao.ajouterPlat_chaud(Plat_chaud);
 		
 		int i = Plat_chaudDao.listerPlat_chaud().size();
 		Assert.assertEquals(8,i);
 		
-		Plat_chaudDao.supprimerPlat_chaud("Pomme de terre");
+		Plat_chaudDao.supprimerPlat_chaud(9);
 		int j = Plat_chaudDao.listerPlat_chaud().size();
 		Assert.assertEquals(7,j);
 		Plat_chaud Plat_chaud2 = Plat_chaudDao.listerPlat_chaud().get(j-1);

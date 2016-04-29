@@ -45,12 +45,12 @@
 	</c:import>
 	
     <a href="accueilprive"><img id="logo" src="img/logo.jpg" /></a>
-	<A HREF="espace">Se déconnecter</A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
 	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espace"><input type="Button" value="<fmt:message key="deconnecter" />" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
@@ -78,13 +78,13 @@
                    		
 				        <a href="
 				        	<c:url value="supprimerSandwich">
-				  				<c:param name="askSandwichNom" value="${sandwich.nom}"/>
+				  				<c:param name="askSandwichId" value="${sandwich.id}"/>
 							</c:url>
 						" class="glyphicon glyphicon-trash"></a>
 				        
 				        <a href="
 				        <c:url value="modifierSandiwch">
-				  			<c:param name="sandwichNom" value="${sandwich.nom}"/>
+				  			<c:param name="sandwichId" value="${sandwich.id}"/>
 						</c:url>
 				        " class="glyphicon glyphicon-edit" ></a>
                     		
@@ -95,7 +95,7 @@
      	<h3 align="center"><A href="javascript:ouvre_popup('ajoutSandwich')"><fmt:message key="sandwich.add"/></A></h3>
 		<SCRIPT>
 		   function ouvre_popup(page) {
-		       window.open(page,"Ajout sandwich","menubar=no, status=no, menubar=no, width=600, height=500");
+		       window.open(page,"Ajout sandwich","menubar=no, status=no, menubar=no, width=600, height=452");
 		   }
 		</SCRIPT>
                   

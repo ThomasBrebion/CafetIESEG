@@ -37,15 +37,42 @@ public class AjoutPetitDessertServlet extends GenericServlet {
 
 		}
 
-		if (prix == null || this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajouterPetitDessert");
-		} else {
-			Petit_dessert petit_dessert = new Petit_dessert(nom,prix);
-			Ensemble.getInstance().ajouterPetit_dessert(petit_dessert);
-			response.sendRedirect("modificationOK");
-			
+		int j = Ensemble.getInstance().listerPetit_dessert().size();
+
+		boolean bool = true;
+		for(int k=0;k<j;k++){
+			if(nom.equals(Ensemble.getInstance().listerPetit_dessert().get(k).getNom())){
+				bool = false;
+			}
 		}
+		
+		if(j!=0){
+			int lastId = Ensemble.getInstance().listerPetit_dessert().get(j-1).getId();
+
+			
+			if(bool==false){
+				request.getSession().setAttribute("messageErreur", "Ce petit dessert existe déjà");
+				response.sendRedirect("ajouterPetitDessert");
+			} else if (this.isNullOrEmpty(nom) || prix == null) {
+				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+				response.sendRedirect("ajouterPetitDessert");
+			} else {
+				Petit_dessert nouveauPetit_dessert = new Petit_dessert(nom, prix,lastId+1);
+				Ensemble.getInstance().ajouterPetit_dessert(nouveauPetit_dessert);
+				response.sendRedirect("modificationOK");
+			}
+				}
+			else{
+				if (this.isNullOrEmpty(nom) || prix == null) {
+					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+					response.sendRedirect("ajouterPetitDessert");
+				} else {
+					Petit_dessert nouveauPetit_dessert = new Petit_dessert(nom, prix,1);
+					Ensemble.getInstance().ajouterPetit_dessert(nouveauPetit_dessert);
+					response.sendRedirect("modificationOK");
+				}
+				
+			}
 		
 		
 	}

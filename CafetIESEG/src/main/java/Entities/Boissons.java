@@ -2,13 +2,15 @@ package Entities;
 
 public class Boissons {
 
-	private String nom;
+    private int id;
+    private String nom;
 	private double prix;
 	
-	public Boissons(String nom,double prix){
+	public Boissons(String nom,double prix,int id){
 		super();
 		this.nom=nom;
 		this.prix=prix;
+		this.setId(id);
 		
 	}
 	
@@ -24,6 +26,16 @@ public class Boissons {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

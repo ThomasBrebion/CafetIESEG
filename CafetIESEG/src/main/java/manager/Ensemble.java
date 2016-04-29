@@ -58,6 +58,8 @@ public class Ensemble {
 	private Ensemble() {
 	}
 
+	
+	
 	public List<Produits> listerProduits() {
 		return produitsDao.listerProduits();
 	}
@@ -81,65 +83,130 @@ public class Ensemble {
 		produitsDao.supprimerProduit(id);
 	}
 	
+	
+	
+	
+	
 	public List<Grand_dessert> listerGrand_dessert() {
 		return grand_dessertDao.listerGrand_dessert();
 	}
 
-	public Grand_dessert getGrand_dessert(String nom) {
-		return grand_dessertDao.getGrand_dessert(nom);
+	public Grand_dessert getGrand_dessert(int id) {
+		return grand_dessertDao.getGrand_dessert(id);
 	}
 
 	public Grand_dessert ajouterGrand_dessert(Grand_dessert grand_dessert) {
 		return grand_dessertDao.ajouterGrand_dessert(grand_dessert);
 	}
 	
-	public List<Petit_dessert> listerPetit_dessert() {
-		return petit_dessertDao.listerPetit_dessert();
+	public void supprimerGrand_dessert(int id) {
+		grand_dessertDao.supprimerGrand_dessert(id);
 	}
-
-	public Petit_dessert getPetit_dessert(String nom) {
-		return petit_dessertDao.getPetit_dessert(nom);
+	
+	public void majGrand_dessert(Grand_dessert grand_dessert) {
+		grand_dessertDao.majGrand_dessert(grand_dessert);
+	}
+	
+	
+	
+	
+	
+	
+	public Petit_dessert getPetit_dessert(int id) {
+		return petit_dessertDao.getPetit_dessert(id);
 	}
 
 	public Petit_dessert ajouterPetit_dessert(Petit_dessert petit_dessert) {
 		return petit_dessertDao.ajouterPetit_dessert(petit_dessert);
 	}
 	
+	public List<Petit_dessert> listerPetit_dessert() {
+		return petit_dessertDao.listerPetit_dessert();
+	}
+	
+	public void supprimerPetitDessert(int id) {
+		petit_dessertDao.supprimerPetit_dessert(id);
+	}
+	
+	public void majPetit_dessert(Petit_dessert petit_dessert) {
+		petit_dessertDao.majPetit_dessert(petit_dessert);
+	}
+	
+	
+	
+	
+	
 	public List<Boissons> listerBoissons() {
 		return boissonDao.listerBoissons();
 	}
 
-	public Boissons getBoissons(String nom) {
-		return boissonDao.getBoissons(nom);
+	public Boissons getBoissons(int id) {
+		return boissonDao.getBoissons(id);
 	}
 
 	public Boissons ajouterBoissons(Boissons boissons) {
 		return boissonDao.ajouterBoissons(boissons);
 	}
+
+	public void supprimerBoisson(int id) {
+		boissonDao.supprimerBoissons(id);		
+	}
+	
+	public void majBoissons(Boissons boissons) {
+		boissonDao.majBoissons(boissons);
+	}
+	
+	
+	
+	
 	
 	public List<Plat_chaud> listerPlat_chauds() {
 		return plat_chaudsDao.listerPlat_chaud();
 	}
 
-	public Plat_chaud getPlat_chaud(String nom) {
-		return plat_chaudsDao.getPlat_chaud(nom);
+	public Plat_chaud getPlat_chaud(int id) {
+		return plat_chaudsDao.getPlat_chaud(id);
 	}
 
 	public Plat_chaud ajouterPlat_chaud(Plat_chaud plat_chaud) {
 		return plat_chaudsDao.ajouterPlat_chaud(plat_chaud);
 	}
 	
+	public void supprimerPlatChaud(int id) {
+		plat_chaudsDao.supprimerPlat_chaud(id);
+	}
+	
+	public void majPlatChaud(Plat_chaud plat_chaud) {
+		plat_chaudsDao.majPlat_chaud(plat_chaud);
+	}
+	
+	
+	
+	
+	
 	public List<Salades> listerSalades() {
 		return saladesDao.listerSalades();
 	}
 
-	public Salades getSalades(String nom) {
-		return saladesDao.getSalade(nom);
+	public Salades getSalades(int id) {
+		return saladesDao.getSalade(id);
 	}
 
 	public Salades ajouterSalades(Salades salades) {
 		return saladesDao.ajouterSalade(salades);
 	}
+	
+	public void supprimerSalade(int id) {
+		saladesDao.supprimerSalade(id);
+	}
+	
+	public void majSalades(Salades salades) {
+		saladesDao.majSalade(salades);
+	}
+	
+	
+	
+	
 	
 	public List<Sandwich> listerSandwichs() {
 		return sandwichsDao.listerSandwichs();
@@ -153,6 +220,18 @@ public class Ensemble {
 		return sandwichsDao.ajouterSandwich(sandwich);
 	}
 	
+	public void supprimerSandwich(int id) {
+		sandwichsDao.supprimerSandwich(id);
+		
+	}
+	
+	public void majSandwich(Sandwich sandwich) {
+		sandwichsDao.majSandwich(sandwich);
+	}
+	
+	
+	
+	
 	public List<Plat> listerPlat() {
 		return platDao.listerPlat();
 	}
@@ -160,6 +239,11 @@ public class Ensemble {
 	public Plat getPlat(String nom) {
 		return platDao.getPlat(nom);
 	}
+	
+	
+	
+	
+	
 	
 	public List<Utilisateur> listerUtilisateurs() {
 		return utilisateurDao.listerUtilisateurs();
@@ -172,6 +256,10 @@ public class Ensemble {
 	public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
 		return utilisateurDao.ajouterUtilisateur(utilisateur);
 	}
+	
+	
+	
+	
 	
 	public List<Article> listerArticles() {
 		return articleDao.listerArticles();
@@ -192,29 +280,4 @@ public class Ensemble {
 	public void majArticle(Article article) {
 		articleDao.majArticle(article);
 	}
-
-	public void supprimerBoisson(String nom) {
-		
-	}
-
-	public void supprimerPetitDessert(String titre) {
-		
-	}
-
-	public void supprimerGrandDessert(String nom) {
-		
-	}
-
-	public void supprimerSalade(String titre) {
-		
-	}
-
-	public void supprimerSandwich(int id) {
-		
-	}
-
-	public void supprimerPlatChaud(String nom) {
-		
-	}
-
 }

@@ -7,9 +7,11 @@ import Entities.Grand_dessert;
 public interface Grand_dessertDao {
 	public List<Grand_dessert> listerGrand_dessert();
 
-	public Grand_dessert getGrand_dessert(String nom);
+	public Grand_dessert getGrand_dessert(int id);
 
 	public Grand_dessert ajouterGrand_dessert(Grand_dessert grand_dessert);
 
-	public void supprimerGrand_dessert(String nom);
+	public void supprimerGrand_dessert(int id);
+	
+	public void majGrand_dessert(Grand_dessert grand_dessert);
 }

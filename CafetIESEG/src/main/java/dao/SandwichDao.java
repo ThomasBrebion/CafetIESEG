@@ -12,4 +12,6 @@ public interface SandwichDao {
 	public Sandwich ajouterSandwich(Sandwich sandwich);
 
 	public void supprimerSandwich(int id);
+	
+	public void majSandwich(Sandwich sandwich);
 }

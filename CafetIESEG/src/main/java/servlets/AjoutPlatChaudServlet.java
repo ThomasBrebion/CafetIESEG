@@ -30,7 +30,7 @@ public class AjoutPlatChaudServlet extends GenericServlet {
 		
 		String nom = request.getParameter("nom");
 		Double prix_solo = null ;
-		Double prix_menu = null;
+		Double prix_menu = null ;
 		
 		try {
 			prix_solo = Double.parseDouble(request.getParameter("prix_solo"));
@@ -39,15 +39,42 @@ public class AjoutPlatChaudServlet extends GenericServlet {
 
 		}
 
-		if (prix_solo == null || prix_menu == null || this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajouterPlatChaud");
-		} else {
-			Plat_chaud nouveauPlatChaud = new Plat_chaud(nom,prix_solo,prix_menu);
-			Ensemble.getInstance().ajouterPlat_chaud(nouveauPlatChaud);
-			response.sendRedirect("modificationOK");
-			
+		int j = Ensemble.getInstance().listerPlat_chauds().size();
+
+		boolean bool = true;
+		for(int k=0;k<j;k++){
+			if(nom.equals(Ensemble.getInstance().listerPlat_chauds().get(k).getNom())){
+				bool = false;
+			}
 		}
+		
+		if(j!=0){
+			int lastId = Ensemble.getInstance().listerPlat_chauds().get(j-1).getId();
+
+			
+			if(bool==false){
+				request.getSession().setAttribute("messageErreur", "Ce plat chaud existe déjà");
+				response.sendRedirect("ajouterPlatChaud");
+			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+				response.sendRedirect("ajouterPlatChaud");
+			} else {
+				Plat_chaud nouveauPlatChaud = new Plat_chaud(nom, prix_solo,prix_menu,lastId+1);
+				Ensemble.getInstance().ajouterPlat_chaud(nouveauPlatChaud);
+				response.sendRedirect("modificationOK");
+			}
+				}
+			else{
+				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+					response.sendRedirect("ajouterPlatChaud");
+				} else {
+					Plat_chaud nouveauPlatChaud = new Plat_chaud(nom, prix_solo,prix_menu,1);
+					Ensemble.getInstance().ajouterPlat_chaud(nouveauPlatChaud);
+					response.sendRedirect("modificationOK");
+				}
+				
+			}
 		
 		
 	}

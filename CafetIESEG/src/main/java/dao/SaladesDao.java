@@ -7,9 +7,11 @@ import Entities.Salades;
 public interface SaladesDao {
 	public List<Salades> listerSalades();
 
-	public Salades getSalade(String nom);
+	public Salades getSalade(int id);
 
 	public Salades ajouterSalade(Salades salades);
 
-	public void supprimerSalade(String nom);
+	public void supprimerSalade(int id);
+	
+	public void majSalade(Salades salade);
 }

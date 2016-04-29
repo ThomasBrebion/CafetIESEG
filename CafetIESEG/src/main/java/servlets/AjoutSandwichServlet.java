@@ -29,15 +29,16 @@ public class AjoutSandwichServlet extends GenericServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String nom = request.getParameter("nom");
-		Double prix_solo = null;
-		Double prix_menu = null;
-
+		Double prix_solo = null ;
+		Double prix_menu = null ;
+		
 		try {
 			prix_solo = Double.parseDouble(request.getParameter("prix_solo"));
 			prix_menu = Double.parseDouble(request.getParameter("prix_menu"));
 		} catch (NumberFormatException e) {
 
 		}
+
 		int j = Ensemble.getInstance().listerSandwichs().size();
 
 		boolean bool = true;
@@ -48,33 +49,32 @@ public class AjoutSandwichServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
-		int lastId = Ensemble.getInstance().listerSandwichs().get(j-1).getId();
+			int lastId = Ensemble.getInstance().listerSandwichs().get(j-1).getId();
 
-
-		
-		if(bool==false){
-			request.getSession().setAttribute("messageErreur1", "Ce sandwich existe déjà");
-			response.sendRedirect("ajoutSandwich");
-		} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-			request.getSession().setAttribute("messageErreur1", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajoutSandwich");
-		} else {
-			Sandwich nouveauSandwich = new Sandwich(nom, prix_solo, prix_menu, lastId+1);
-			Ensemble.getInstance().ajouterSandwich(nouveauSandwich);
-			response.sendRedirect("modificationOK");
-		}
-			}
-		else{
-			if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-				request.getSession().setAttribute("messageErreur1", "Un des champs du formulaire n'a pas été bien renseigné");
+			
+			if(bool==false){
+				request.getSession().setAttribute("messageErreur", "Ce sandwich existe déjà");
+				response.sendRedirect("ajoutSandwich");
+			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
 				response.sendRedirect("ajoutSandwich");
 			} else {
-				Sandwich nouveauSandwich = new Sandwich(nom, prix_solo, prix_menu, 1);
+				Sandwich nouveauSandwich = new Sandwich(nom, prix_solo,prix_menu,lastId+1);
 				Ensemble.getInstance().ajouterSandwich(nouveauSandwich);
 				response.sendRedirect("modificationOK");
 			}
-			
-		}
+				}
+			else{
+				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+					response.sendRedirect("ajoutSandwich");
+				} else {
+					Sandwich nouveauSandwich = new Sandwich(nom, prix_solo,prix_menu,1);
+					Ensemble.getInstance().ajouterSandwich(nouveauSandwich);
+					response.sendRedirect("modificationOK");
+				}
+				
+			}
 		
 		
 		

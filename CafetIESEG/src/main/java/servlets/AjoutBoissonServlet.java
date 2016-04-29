@@ -37,15 +37,42 @@ public class AjoutBoissonServlet extends GenericServlet {
 
 		}
 
-		if (prix == null || this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajouterBoisson");
-		} else {
-			Boissons nouveauBoisson = new Boissons(nom,prix);
-			Ensemble.getInstance().ajouterBoissons(nouveauBoisson);
-			response.sendRedirect("modificationOK");
-			
+		int j = Ensemble.getInstance().listerBoissons().size();
+
+		boolean bool = true;
+		for(int k=0;k<j;k++){
+			if(nom.equals(Ensemble.getInstance().listerBoissons().get(k).getNom())){
+				bool = false;
+			}
 		}
+		
+		if(j!=0){
+			int lastId = Ensemble.getInstance().listerBoissons().get(j-1).getId();
+
+			
+			if(bool==false){
+				request.getSession().setAttribute("messageErreur", "Cette boisson existe déjà");
+				response.sendRedirect("ajouterBoisson");
+			} else if (this.isNullOrEmpty(nom) || prix == null) {
+				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+				response.sendRedirect("ajouterBoisson");
+			} else {
+				Boissons nouveauBoisson = new Boissons(nom, prix, lastId+1);
+				Ensemble.getInstance().ajouterBoissons(nouveauBoisson);
+				response.sendRedirect("modificationOK");
+			}
+				}
+			else{
+				if (this.isNullOrEmpty(nom) || prix == null) {
+					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+					response.sendRedirect("ajouterBoisson");
+				} else {
+					Boissons nouveauBoisson = new Boissons(nom, prix,1);
+					Ensemble.getInstance().ajouterBoissons(nouveauBoisson);
+					response.sendRedirect("modificationOK");
+				}
+				
+			}
 		
 		
 	}

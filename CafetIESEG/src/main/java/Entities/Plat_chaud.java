@@ -2,12 +2,14 @@ package Entities;
 
 public class Plat_chaud {
 
+	private int id;
 	private String nom;
 	private double prix_solo;
 	private double prix_menu;
 	
-	public Plat_chaud(String nom,double prix_solo,double prix_menu){
+	public Plat_chaud(String nom,double prix_solo,double prix_menu,int id){
 		super();
+		this.setId(id);
 		this.nom=nom;
 		this.prix_solo=prix_solo;
 		this.prix_menu=prix_menu;
@@ -35,6 +37,14 @@ public class Plat_chaud {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

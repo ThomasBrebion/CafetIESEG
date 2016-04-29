@@ -23,7 +23,7 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 			ResultSet resultSet = stmt
 					.executeQuery("SELECT * FROM petit_dessert ORDER BY prix");
 			while (resultSet.next()) {
-				listeDePetit_dessert.add(new Petit_dessert(resultSet.getString("nom"), resultSet.getDouble("prix")));
+				listeDePetit_dessert.add(new Petit_dessert(resultSet.getString("nom"), resultSet.getDouble("prix"),resultSet.getInt("id")));
 			}
 			stmt.close();
 			connection.close();
@@ -34,15 +34,15 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 	}
 
 	@Override
-	public Petit_dessert getPetit_dessert(String nom) {
+	public Petit_dessert getPetit_dessert(int id) {
 		Petit_dessert petit_dessert = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM petit_dessert WHERE nom = ?");
-			stmt.setString(1, nom);
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM petit_dessert WHERE id = ?");
+			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 			if(resultSet.next()) {
-				petit_dessert = new Petit_dessert(resultSet.getString("nom"), resultSet.getDouble("prix"));
+				petit_dessert = new Petit_dessert(resultSet.getString("nom"), resultSet.getDouble("prix"),resultSet.getInt("id"));
 			}			
 			stmt.close();
 			connection.close();
@@ -57,9 +57,10 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `petit_dessert`(`nom`,`prix`)VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `petit_dessert`(`nom`,`prix`,`id`)VALUES(?,?,?);", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, petit_dessert.getNom());
 			stmt.setDouble(2, petit_dessert.getPrix());
+			stmt.setDouble(3, petit_dessert.getId());
 			stmt.executeUpdate();
 			
 			stmt.close();
@@ -71,12 +72,12 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 	}
 
 	@Override
-	public void supprimerPetit_dessert(String nom) {
+	public void supprimerPetit_dessert(int id) {
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `petit_dessert` WHERE `nom`=?");
-			stmt.setString(1, nom);
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `petit_dessert` WHERE `id`=?");
+			stmt.setInt(1, id);
 			stmt.executeUpdate();
 				
 			stmt.close();
@@ -85,5 +86,23 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 			e.printStackTrace();
 		}
 		}
+
+	@Override
+	public void majPetit_dessert(Petit_dessert petit_dessert) {
+		
+		try{
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `petit_dessert` SET nom = ?, prix = ? WHERE `id`=?");
+			stmt.setString(1, petit_dessert.getNom());
+			stmt.setDouble(2, petit_dessert.getPrix());
+			stmt.setInt(3, petit_dessert.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			connection.close();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
 
 }

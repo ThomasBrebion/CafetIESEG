@@ -61,7 +61,7 @@ public class SandwichDaoImpl implements SandwichDao {
 			stmt.setString(1, sandwich.getNom());
 			stmt.setDouble(2, sandwich.getPrix_solo());
 			stmt.setDouble(3, sandwich.getPrix_menu());
-			stmt.setDouble(4, sandwich.getId());
+			stmt.setInt(4, sandwich.getId());
 			stmt.executeUpdate();
 			
 			stmt.close();
@@ -100,5 +100,23 @@ public class SandwichDaoImpl implements SandwichDao {
 			e.printStackTrace();
 		}
 		}
+
+	@Override
+	public void majSandwich(Sandwich sandwich) {
+		
+		try{
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `sandwich` SET nom = ?, prix_solo = ?, prix_menu = ? WHERE `id`=?");
+			stmt.setString(1, sandwich.getNom());
+			stmt.setDouble(2, sandwich.getPrix_solo());
+			stmt.setDouble(3, sandwich.getPrix_menu());
+			stmt.setInt(4, sandwich.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			connection.close();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 
 }

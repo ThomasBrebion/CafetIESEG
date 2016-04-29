@@ -30,7 +30,7 @@ public class AjoutSaladeServlet extends GenericServlet {
 		
 		String nom = request.getParameter("nom");
 		Double prix_solo = null ;
-		Double prix_menu = null;
+		Double prix_menu = null ;
 		
 		try {
 			prix_solo = Double.parseDouble(request.getParameter("prix_solo"));
@@ -39,15 +39,42 @@ public class AjoutSaladeServlet extends GenericServlet {
 
 		}
 
-		if (prix_solo == null || prix_menu == null || this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajouterSalade");
-		} else {
-			Salades nouveauSalade = new Salades(nom,prix_solo,prix_menu);
-			Ensemble.getInstance().ajouterSalades(nouveauSalade);
-			response.sendRedirect("modificationOK");
-			
+		int j = Ensemble.getInstance().listerSalades().size();
+
+		boolean bool = true;
+		for(int k=0;k<j;k++){
+			if(nom.equals(Ensemble.getInstance().listerSalades().get(k).getNom())){
+				bool = false;
+			}
 		}
+		
+		if(j!=0){
+			int lastId = Ensemble.getInstance().listerSalades().get(j-1).getId();
+
+			
+			if(bool==false){
+				request.getSession().setAttribute("messageErreur", "Cette salade existe déjà");
+				response.sendRedirect("ajouterSalade");
+			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+				response.sendRedirect("ajouterSalade");
+			} else {
+				Salades nouveauSalade = new Salades(nom, prix_solo,prix_menu,lastId+1);
+				Ensemble.getInstance().ajouterSalades(nouveauSalade);
+				response.sendRedirect("modificationOK");
+			}
+				}
+			else{
+				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
+					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
+					response.sendRedirect("ajouterSalade");
+				} else {
+					Salades nouveauSalades = new Salades(nom, prix_solo,prix_menu,1);
+					Ensemble.getInstance().ajouterSalades(nouveauSalades);
+					response.sendRedirect("modificationOK");
+				}
+				
+			}
 		
 		
 	}
