@@ -49,7 +49,7 @@
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
-	<a href="espace"><input type="Button" value="Espace Privé" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->

@@ -1,50 +1,109 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Salades;
 import manager.Ensemble;
 
+/**
+ * Servlet implementation class SupprimerSaladeServlet
+ */
 @WebServlet("/supprimerSalade")
-public class SupprimerSaladeServlet extends GenericServlet {
+public class SupprimerSaladeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SupprimerSaladeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	private static final long serialVersionUID = 6880801727716084460L;
-
-	@Override
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doGet(request, response);
-
-		List<Salades> salade = Ensemble.getInstance().listerSalades();
-		request.setAttribute("listeSalades", salade);
+		boolean problem = false;
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerSalade.jsp");
-		view.forward(request, response);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String nom = request.getParameter("nom");
-
-		if (this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("supprimerSalade");
-			} else {
-			Ensemble.getInstance().supprimerSalade(nom);
-			response.sendRedirect("modificationOK");
+		//Recuperation du parametre GET
+		String value = request.getParameter("askSaladeId");
+		int saladeId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				saladeId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			boolean asksConfirmation = false;
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				message = "Voulez-vous supprimer la salade avec l'id " + saladeId + " ? ";
+				asksConfirmation = true;
+			}
+			request.setAttribute("message", message);
+			request.setAttribute("saladeId", saladeId);
+			request.setAttribute("confirmation", asksConfirmation);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerSalade.jsp");
+			view.forward(request, response);
 		}
+		
+		problem = false;
+		value = request.getParameter("saladeId");
+		saladeId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				saladeId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				Ensemble.getInstance().supprimerSalade(saladeId);
+				message = "La salade avec l'id " + saladeId + " a ete supprime";
+			}
+			request.setAttribute("message", message);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerSalade.jsp");
+			view.forward(request, response);
+		}
+		
+		
 	}
 
-	private boolean isNullOrEmpty(String chaine) {
-		return chaine == null || "".equals(chaine);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

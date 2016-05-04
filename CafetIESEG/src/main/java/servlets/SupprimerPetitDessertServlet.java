@@ -1,50 +1,109 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Petit_dessert;
 import manager.Ensemble;
 
-@WebServlet("/supprimerPetitDessert")
-public class SupprimerPetitDessertServlet extends GenericServlet {
+/**
+ * Servlet implementation class SupprimerPetitDessertServlet
+ */
+@WebServlet("/supprimerPetit_dessert")
+public class SupprimerPetitDessertServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SupprimerPetitDessertServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	private static final long serialVersionUID = 6880801727716084460L;
-
-	@Override
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doGet(request, response);
-
-		List<Petit_dessert> petit_dessert = Ensemble.getInstance().listerPetit_dessert();
-		request.setAttribute("listePetitDessert", petit_dessert);
+		boolean problem = false;
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerPetitDessert.jsp");
-		view.forward(request, response);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String nom = request.getParameter("nom");
-
-		if (this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("supprimerPetitDessert");
-			} else {
-			Ensemble.getInstance().supprimerPetitDessert(nom);
-			response.sendRedirect("modificationOK");
+		//Recuperation du parametre GET
+		String value = request.getParameter("askPetit_dessertId");
+		int Petit_dessertId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				Petit_dessertId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			boolean asksConfirmation = false;
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				message = "Voulez-vous supprimer le Petit Dessert avec l'id " + Petit_dessertId + " ? ";
+				asksConfirmation = true;
+			}
+			request.setAttribute("message", message);
+			request.setAttribute("Petit_dessertId", Petit_dessertId);
+			request.setAttribute("confirmation", asksConfirmation);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerPetitDessert.jsp");
+			view.forward(request, response);
 		}
+		
+		problem = false;
+		value = request.getParameter("Petit_dessertId");
+		Petit_dessertId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				Petit_dessertId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				Ensemble.getInstance().supprimerPetit_dessert(Petit_dessertId);
+				message = "Le petit dessert avec l'id " + Petit_dessertId + " a ete supprime";
+			}
+			request.setAttribute("message", message);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerPetitDessert.jsp");
+			view.forward(request, response);
+		}
+		
+		
 	}
 
-	private boolean isNullOrEmpty(String chaine) {
-		return chaine == null || "".equals(chaine);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

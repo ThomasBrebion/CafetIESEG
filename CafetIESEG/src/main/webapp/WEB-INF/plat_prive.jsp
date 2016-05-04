@@ -75,15 +75,23 @@
                     <c:forEach var="plat_chauds" items="${listePlat_chauds}">
                     
                    		<h5>${plat_chauds.nom}</h5><p>${plat_chauds.prix_solo}€</p>
+                   		
+                   		
+                   	 <a href="
+				        	<c:url value="supprimerPlat_chaud">
+				  				<c:param name="askPlat_chaudId" value="${plat_chauds.id}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a>
+				        
+				        <a href="
+				        <c:url value="modifierPlatChaud">
+				  			<c:param name="plat_chaudId" value="${plat_chauds.id}"/>
+						</c:url>
+				        " class="glyphicon glyphicon-edit" ></a>
                     		
                     </c:forEach>
                     
-                    <h3 align="center"><A href="javascript:ouvre_popup('supprimerPlatChaud')">Supprimer un plat chaud</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Supprimer plat chaud","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
+                    <hr>
 					
 			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterPlatChaud')">Ajouter un plat chaud</A></h3>
 					<SCRIPT>

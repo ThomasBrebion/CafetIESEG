@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Sandwich;
+import Entities.Salades;
 import manager.Ensemble;
 
 /**
- * Servlet implementation class SupprimerSandwichServlet
+ * Servlet implementation class SupprimerSaladeServlet
  */
-@WebServlet("/modifierSandwich")
-public class ModifierSandwichServlet extends HttpServlet {
+@WebServlet("/modifierSalade")
+public class ModifierSaladeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifierSandwichServlet() {
+    public ModifierSaladeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,8 @@ public class ModifierSandwichServlet extends HttpServlet {
 		boolean problem = false;
 		
 		//Recuperation du parametre GET
-		String value = request.getParameter("sandwichId");
-		int sandwichId = -1;
+		String value = request.getParameter("saladeId");
+		int saladeId = -1;
 		if (value == null || value.trim().length() == 0)
 			problem = true;
 		else
@@ -43,7 +43,7 @@ public class ModifierSandwichServlet extends HttpServlet {
 		if (!problem)
 		{
 			try {
-				sandwichId = Integer.parseInt(value);
+				saladeId = Integer.parseInt(value);
 			} catch (NumberFormatException | NullPointerException e) {
 				problem = true;
 			}
@@ -54,10 +54,10 @@ public class ModifierSandwichServlet extends HttpServlet {
 			}
 			else
 			{
-				request.setAttribute("sandwich", Ensemble.getInstance().getSandwichs(sandwichId));
+				request.setAttribute("salade", Ensemble.getInstance().getSalade(saladeId));
 			}
 			request.setAttribute("message", message);			
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSandwich.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSalade.jsp");
 			view.forward(request, response);
 		}
 	}
@@ -73,10 +73,10 @@ public class ModifierSandwichServlet extends HttpServlet {
 		Double sPrix_menu = Double.parseDouble(request.getParameter("prix_menu"));
 		
 		try {
-			Sandwich sandwich = new Sandwich(sNom, sPrix_solo, sPrix_menu,sId);
-			Ensemble.getInstance().majSandwich(sandwich);
-			request.setAttribute("message", "Sandwich mis a jour ! / Sandwich updated !");			
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSandwich.jsp");
+			Salades salade = new Salades(sNom, sPrix_solo, sPrix_menu,sId);
+			Ensemble.getInstance().majSalade(salade);
+			request.setAttribute("message", "Salade mis a jour ! / Salade updated !");			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSalade.jsp");
 			view.forward(request, response);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

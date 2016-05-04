@@ -54,7 +54,7 @@
         <div class="container">
 			<a class="img-ieseg" href="http://cafet.ieseg.fr/"><img class="img-ieseg-img" src="img/restonet.png"/></a>
 			<a class="img-ieseg" href="http://www.ieseg.fr/"><img class="img-ieseg-img" src="img/ieseg.png"/></a>
-      		<a href="espace"><input type="Button" value="Espace Privé" class="espaceprive" aria-label="Espace Privé"/></a>
+      		<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
 			<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			<div class="fb-like" data-href="https://www.facebook.com/CafetIeseg/?fref=ts" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 		</div>

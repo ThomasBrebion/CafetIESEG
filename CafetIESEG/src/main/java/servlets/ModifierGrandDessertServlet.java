@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Sandwich;
+import Entities.Grand_dessert;
 import manager.Ensemble;
 
 /**
- * Servlet implementation class SupprimerSandwichServlet
+ * Servlet implementation class SupprimerPetitDessertServlet
  */
-@WebServlet("/modifierSandwich")
-public class ModifierSandwichServlet extends HttpServlet {
+@WebServlet("/modifierGrandDessert")
+public class ModifierGrandDessertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifierSandwichServlet() {
+    public ModifierGrandDessertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,8 @@ public class ModifierSandwichServlet extends HttpServlet {
 		boolean problem = false;
 		
 		//Recuperation du parametre GET
-		String value = request.getParameter("sandwichId");
-		int sandwichId = -1;
+		String value = request.getParameter("grand_dessertId");
+		int grand_dessertId = -1;
 		if (value == null || value.trim().length() == 0)
 			problem = true;
 		else
@@ -43,7 +43,7 @@ public class ModifierSandwichServlet extends HttpServlet {
 		if (!problem)
 		{
 			try {
-				sandwichId = Integer.parseInt(value);
+				grand_dessertId = Integer.parseInt(value);
 			} catch (NumberFormatException | NullPointerException e) {
 				problem = true;
 			}
@@ -54,10 +54,10 @@ public class ModifierSandwichServlet extends HttpServlet {
 			}
 			else
 			{
-				request.setAttribute("sandwich", Ensemble.getInstance().getSandwichs(sandwichId));
+				request.setAttribute("grand_dessert", Ensemble.getInstance().getGrand_dessert(grand_dessertId));
 			}
 			request.setAttribute("message", message);			
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSandwich.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierGrandDessert.jsp");
 			view.forward(request, response);
 		}
 	}
@@ -69,14 +69,14 @@ public class ModifierSandwichServlet extends HttpServlet {
 		System.out.println(request.getParameter("id"));
 		Integer sId = Integer.parseInt(request.getParameter("id"));
 		String sNom = request.getParameter("nom");
-		Double sPrix_solo = Double.parseDouble(request.getParameter("prix_solo"));
-		Double sPrix_menu = Double.parseDouble(request.getParameter("prix_menu"));
+		Double sPrix = Double.parseDouble(request.getParameter("prix"));
+		
 		
 		try {
-			Sandwich sandwich = new Sandwich(sNom, sPrix_solo, sPrix_menu,sId);
-			Ensemble.getInstance().majSandwich(sandwich);
-			request.setAttribute("message", "Sandwich mis a jour ! / Sandwich updated !");			
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierSandwich.jsp");
+			Grand_dessert grand_dessert = new Grand_dessert(sNom, sPrix,sId);
+			Ensemble.getInstance().majGrand_dessert(grand_dessert);
+			request.setAttribute("message", "Grand dessert mis a jour ! / Grand dessert updated !");			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/modifierGrandDessert.jsp");
 			view.forward(request, response);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

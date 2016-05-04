@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entities.Salades;
 import manager.Ensemble;
 
-@WebServlet("/ajouterSalade")
+@WebServlet("/ajoutSalade")
 public class AjoutSaladeServlet extends GenericServlet {
 
 	private static final long serialVersionUID = 6880801727716084460L;
@@ -54,10 +54,10 @@ public class AjoutSaladeServlet extends GenericServlet {
 			
 			if(bool==false){
 				request.getSession().setAttribute("messageErreur", "Cette salade existe déjà");
-				response.sendRedirect("ajouterSalade");
+				response.sendRedirect("ajoutSalade");
 			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
 				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-				response.sendRedirect("ajouterSalade");
+				response.sendRedirect("ajoutSalade");
 			} else {
 				Salades nouveauSalade = new Salades(nom, prix_solo,prix_menu,lastId+1);
 				Ensemble.getInstance().ajouterSalades(nouveauSalade);
@@ -67,7 +67,7 @@ public class AjoutSaladeServlet extends GenericServlet {
 			else{
 				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
 					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-					response.sendRedirect("ajouterSalade");
+					response.sendRedirect("ajoutSalade");
 				} else {
 					Salades nouveauSalades = new Salades(nom, prix_solo,prix_menu,1);
 					Ensemble.getInstance().ajouterSalades(nouveauSalades);

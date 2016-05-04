@@ -49,7 +49,7 @@
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
-	<a href="espace"><input type="Button" value="Espace Privé" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
     <!-- Menu de navigation -->
     <c:import url="nav.jsp">
@@ -174,7 +174,7 @@ function Email() {
                                 <textarea required class="form-control" id="message" name="message" rows="6"></textarea>
                             </div>
 	                            <div class="form-group col-lg-12">
-								<input type="button" value="Envoyer" onClick="Email()">
+								<input type="button" value="<fmt:message key="envoyer"/>" onClick="Email()">
                             </div>
                         </div>
                      </form>

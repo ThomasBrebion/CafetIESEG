@@ -85,12 +85,24 @@ public class BoissonDaoImpl implements BoissonsDao {
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
-		}
+	}	
+	
 
 	@Override
 	public void majBoissons(Boissons boissons) {
-		// TODO Auto-generated method stub
 		
+		try{
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `boissons` SET nom = ?, prix = ? WHERE `id`=?");
+			stmt.setString(1, boissons.getNom());
+			stmt.setDouble(2, boissons.getPrix());
+			stmt.setInt(3, boissons.getId());
+			stmt.executeUpdate();
+			stmt.close();
+			connection.close();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 
 }

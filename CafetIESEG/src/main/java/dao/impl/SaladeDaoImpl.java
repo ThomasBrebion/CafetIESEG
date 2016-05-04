@@ -53,15 +53,15 @@ public class SaladeDaoImpl implements SaladesDao {
 	}
 
 	@Override
-	public Salades ajouterSalade(Salades salades) {
+	public Salades ajouterSalade(Salades salade) {
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `salade`(`nom`,`prix_solo`,`prix_menu`,`id`)VALUES(?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, salades.getNom());
-			stmt.setDouble(2, salades.getPrix_solo());
-			stmt.setDouble(3, salades.getPrix_menu());
-			stmt.setInt(4, salades.getId());
+			stmt.setString(1, salade.getNom());
+			stmt.setDouble(2, salade.getPrix_solo());
+			stmt.setDouble(3, salade.getPrix_menu());
+			stmt.setInt(4, salade.getId());
 			stmt.executeUpdate();
 			
 			stmt.close();
@@ -72,8 +72,8 @@ public class SaladeDaoImpl implements SaladesDao {
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `plat`(`nom`,`prix`)VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, salades.getNom());
-			stmt.setDouble(2, salades.getPrix_menu());
+			stmt.setString(1, salade.getNom());
+			stmt.setDouble(2, salade.getPrix_menu());
 			stmt.executeUpdate();
 			
 			stmt.close();
@@ -81,7 +81,7 @@ public class SaladeDaoImpl implements SaladesDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return salades;
+		return salade;
 	}
 
 	@Override

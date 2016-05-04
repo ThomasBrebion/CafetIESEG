@@ -1,50 +1,109 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Entities.Boissons;
 import manager.Ensemble;
 
+/**
+ * Servlet implementation class SupprimerBoissonServlet
+ */
 @WebServlet("/supprimerBoisson")
-public class SupprimerBoissonServlet extends GenericServlet {
+public class SupprimerBoissonServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SupprimerBoissonServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	private static final long serialVersionUID = 6880801727716084460L;
-
-	@Override
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doGet(request, response);
-
-		List<Boissons> boisson = Ensemble.getInstance().listerBoissons();
-		request.setAttribute("listeBoissons", boisson);
+		boolean problem = false;
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerBoisson.jsp");
-		view.forward(request, response);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String nom = request.getParameter("nom");
-
-		if (this.isNullOrEmpty(nom)) {
-			request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("supprimerBoisson");
-			} else {
-			Ensemble.getInstance().supprimerBoisson(nom);
-			response.sendRedirect("modificationOK");
+		//Recuperation du parametre GET
+		String value = request.getParameter("askBoissonId");
+		int boissonId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				boissonId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			boolean asksConfirmation = false;
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				message = "Voulez-vous supprimer la boisson avec l'id " + boissonId + " ? ";
+				asksConfirmation = true;
+			}
+			request.setAttribute("message", message);
+			request.setAttribute("boissonId", boissonId);
+			request.setAttribute("confirmation", asksConfirmation);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerBoisson.jsp");
+			view.forward(request, response);
 		}
+		
+		problem = false;
+		value = request.getParameter("boissonId");
+		boissonId = -1;
+		if (value == null || value.trim().length() == 0)
+			problem = true;
+		else
+			value = value.trim();
+		if (!problem)
+		{
+			try {
+				boissonId = Integer.parseInt(value);
+			} catch (NumberFormatException | NullPointerException e) {
+				problem = true;
+			}
+			String message = "";
+			if (problem)
+			{
+				message = "Probleme avec le parametre GET : \"" + value + "\"";
+			}
+			else
+			{
+				Ensemble.getInstance().supprimerBoisson(boissonId);
+				message = "L'article avec l'id " + boissonId + " a ete supprime";
+			}
+			request.setAttribute("message", message);
+			
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/supprimerBoisson.jsp");
+			view.forward(request, response);
+		}
+		
+		
 	}
 
-	private boolean isNullOrEmpty(String chaine) {
-		return chaine == null || "".equals(chaine);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

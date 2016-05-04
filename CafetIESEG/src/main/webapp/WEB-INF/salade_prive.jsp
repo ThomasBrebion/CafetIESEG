@@ -75,17 +75,24 @@
                     <c:forEach var="salades" items="${listeSalades}">
                     
                    		<h5>${salades.nom}</h5><p>${salades.prix_solo}€</p>
-                    		
+                   	
+                   	 <a href="
+				        	<c:url value="supprimerSalade">
+				  				<c:param name="askSaladeId" value="${salades.id}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a>
+				        
+				        <a href="
+				        <c:url value="modifierSalade">
+				  			<c:param name="saladeId" value="${salades.id}"/>
+						</c:url>
+				        " class="glyphicon glyphicon-edit" ></a>
+                    	
                     </c:forEach>
                     
-                    <h3 align="center"><A href="javascript:ouvre_popup('supprimerSalade')">Supprimer une salade</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Supprimer salade","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
-					
-			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterSalade')">Ajouter une salade</A></h3>
+                    <hr>
+                  
+			     	<h3 align="center"><A href="javascript:ouvre_popup('ajoutSalade')"><fmt:message key="salade.add"/></A></h3>
 					<SCRIPT>
 					   function ouvre_popup(page) {
 					       window.open(page,"Ajout salade","menubar=no, status=no, menubar=no, width=600, height=500");

@@ -124,7 +124,7 @@ public class Ensemble {
 		return petit_dessertDao.listerPetit_dessert();
 	}
 	
-	public void supprimerPetitDessert(int id) {
+	public void supprimerPetit_dessert(int id) {
 		petit_dessertDao.supprimerPetit_dessert(id);
 	}
 	
@@ -172,11 +172,11 @@ public class Ensemble {
 		return plat_chaudsDao.ajouterPlat_chaud(plat_chaud);
 	}
 	
-	public void supprimerPlatChaud(int id) {
+	public void supprimerPlat_chaud(int id) {
 		plat_chaudsDao.supprimerPlat_chaud(id);
 	}
 	
-	public void majPlatChaud(Plat_chaud plat_chaud) {
+	public void majPlat_chaud(Plat_chaud plat_chaud) {
 		plat_chaudsDao.majPlat_chaud(plat_chaud);
 	}
 	
@@ -188,7 +188,7 @@ public class Ensemble {
 		return saladesDao.listerSalades();
 	}
 
-	public Salades getSalades(int id) {
+	public Salades getSalade(int id) {
 		return saladesDao.getSalade(id);
 	}
 
@@ -200,8 +200,8 @@ public class Ensemble {
 		saladesDao.supprimerSalade(id);
 	}
 	
-	public void majSalades(Salades salades) {
-		saladesDao.majSalade(salades);
+	public void majSalade(Salades salade) {
+		saladesDao.majSalade(salade);
 	}
 	
 	
@@ -280,4 +280,5 @@ public class Ensemble {
 	public void majArticle(Article article) {
 		articleDao.majArticle(article);
 	}
+
 }

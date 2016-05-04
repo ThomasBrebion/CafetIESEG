@@ -41,82 +41,61 @@
 
 <body>
 
-    <c:import url="language.jsp">
-	</c:import>
-	
-    <a href="accueilprive"><img id="logo" src="img/logo.jpg" /></a>
+   <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
 	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
-	<a href="espace"><input type="Button" value="<fmt:message key="deconnecter" />" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
 	    <c:param name="pageSelectionnee" value="carte"/>
-	</c:import> 
-
-    <div class="container">
-
-        <div class="row">
+	</c:import>
+	   
+    <div align="center" class="container">
+    <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center">
-                    
-                    <h1 class="brand-name"><fmt:message key="boisson.titre" /></h1>
-					
-                    <hr class="tagline-divider">
-                   
-				   <h3><fmt:message key="boisson.text1" /></h3><h4><fmt:message key="boisson.text2" /></h4>
-				   
-                    <hr class="tagline-divider2">
-                    
-                    <c:forEach var="boisson" items="${listeBoissons}">
-                    
-                   		<h5>${boisson.nom}</h5><p>${boisson.prix}€</p>
-                   		
-				        <a href="
-				        	<c:url value="supprimerBoisson">
-				  				<c:param name="askBoissonId" value="${boisson.id}"/>
-							</c:url>
-						" class="glyphicon glyphicon-trash"></a>
-				        
-				        <a href="
-				        <c:url value="modifierBoisson">
-				  			<c:param name="boissonId" value="${boisson.id}"/>
-						</c:url>
-				        " class="glyphicon glyphicon-edit" ></a>
-                    		
-                    </c:forEach>
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                    	<fmt:message key="modifier" /> Petit Dessert
+                    </h2>
                     
                     <hr>
-                    
-					
-			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterBoisson')"><fmt:message key="boisson.add"/></A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Ajout boisson","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
-                  
-                  <div class="nextandprevious">
-                  
-                  <div class="gauche">
-                  	<a href="saladeprive"><span class="glyphicon glyphicon-arrow-left"></span></a>
-                  </div>
-                  
-                  <div class="droit">
-                  	<a href="petitdessertprive"><span class="glyphicon glyphicon-arrow-right"></span></a>
-                  </div>
-                  
-                  </div>
-                 
-                </div>
-            </div>
-        </div>
+		
+		<h2>${message}</h2>
+		
+		<c:if test="${ not empty petit_dessert }">
+		<form method="post" class="form-horizontal"  accept-charset="ISO-8859-1">
+		<input type="hidden" name="id" id="id" value="${petit_dessert.id}">
+					<div class="form-group">
+						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="name" /></label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="nom" id="nom" value="${petit_dessert.nom}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="prix" /></label>
+						<div class="col-sm-3">
+							<input type="number" min="0" step="0.1" class="form-control" name="prix" id="prix" value="${petit_dessert.prix}">
+						</div>
+					</div>
 
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8">
+							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer"/>">
+						</div>
+					</div>
+				</form>
+				</c:if>
     </div>
+    </div>
+    </div>
+    </div>
+    
+    
     <!-- /.container -->
 
     <footer>
@@ -128,13 +107,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
 
 </body>
 

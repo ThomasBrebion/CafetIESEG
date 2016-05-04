@@ -83,7 +83,7 @@
 						" class="glyphicon glyphicon-trash"></a>
 				        
 				        <a href="
-				        <c:url value="modifierSandiwch">
+				        <c:url value="modifierSandwich">
 				  			<c:param name="sandwichId" value="${sandwich.id}"/>
 						</c:url>
 				        " class="glyphicon glyphicon-edit" ></a>

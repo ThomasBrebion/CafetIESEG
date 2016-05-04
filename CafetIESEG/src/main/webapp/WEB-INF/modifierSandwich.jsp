@@ -51,7 +51,7 @@
 	
     <!-- Menu de navigation -->
     <c:import url="navprive.jsp">
-	    <c:param name="pageSelectionnee" value="accueil"/>
+	    <c:param name="pageSelectionnee" value="carte"/>
 	</c:import>
 	   
     <div align="center" class="container">
@@ -60,32 +60,32 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    	<fmt:message key="modifier" /> Article
+                    	<fmt:message key="modifier" /> Sandwich
                     </h2>
                     
                     <hr>
 		
 		<h2>${message}</h2>
 		
-		<c:if test="${ not empty article }">
+		<c:if test="${ not empty sandwich }">
 		<form method="post" class="form-horizontal"  accept-charset="ISO-8859-1">
-		<input type="hidden" name="id" id="id" value="${article.id}">
+		<input type="hidden" name="id" id="id" value="${sandwich.id}">
 					<div class="form-group">
-						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="nom" /></label>
+						<label for="nom2" class="col-sm-2 control-label"><fmt:message key="name" /></label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" name="nom" id="nom" value="${sandwich.nom}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label"><fmt:message key="prix_solo" /></label>
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="prixsolo" /></label>
 						<div class="col-sm-3">
-							<input type="number" class="form-control" name="prix_solo" id="prix_solo" value="${sandwich.prix_solo}">
+							<input type="number" min="0" step="0.1" class="form-control" name="prix_solo" id="prix_solo" value="${sandwich.prix_solo}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label"><fmt:message key="prix_menu" /></label>
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="prixmenu" /></label>
 						<div class="col-sm-3">
-							<input type="number" class="form-control" name="prix_menu" id="prix_menu" value="${sandwich.prix_menu}">
+							<input type="number" min="0" step="0.1" class="form-control" name="prix_menu" id="prix_menu" value="${sandwich.prix_menu}">
 						</div>
 					</div>
 					<div class="form-group">

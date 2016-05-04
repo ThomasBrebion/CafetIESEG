@@ -75,15 +75,22 @@
                     <c:forEach var="grand_dessert" items="${listeGrand_dessert}">
                     
                    		<h5>${grand_dessert.nom}</h5><p>${grand_dessert.prix}€</p>
+                   		
+                   	  <a href="
+				        	<c:url value="supprimerGrand_dessert">
+				  				<c:param name="askGrand_dessertId" value="${grand_dessert.id}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a>
+				        
+				        <a href="
+				        <c:url value="modifierGrandDessert">
+				  			<c:param name="grand_dessertId" value="${grand_dessert.id}"/>
+						</c:url>
+				        " class="glyphicon glyphicon-edit" ></a>
                     		
                     </c:forEach>
                     
-                    <h3 align="center"><A href="javascript:ouvre_popup('supprimerGrandDessert')">Supprimer un grand dessert</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Supprimer grand dessert","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
+                    <hr>                   
 					
 			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterGrandDessert')"><fmt:message key="granddessert.add"/></A></h3>
 					<SCRIPT>
