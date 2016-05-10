@@ -76,6 +76,7 @@ public class BoissonDaoTestCase {
 		Assert.assertEquals(boissonAjoute.getNom(),rs.getString("nom"));
 		Assert.assertEquals(boissonAjoute.getPrix(),rs.getDouble("prix"),0);
 		Assert.assertFalse(rs.next());
+		boissonDao.supprimerBoissons(7);
 		connection.close();
 	}
 	
@@ -86,7 +87,7 @@ public class BoissonDaoTestCase {
 		
 		int i = boissonDao.listerBoissons().size();
 		Assert.assertEquals(7,i);
-		
+
 		boissonDao.supprimerBoissons(8);
 		int j = boissonDao.listerBoissons().size();
 		Assert.assertEquals(6,j);

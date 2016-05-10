@@ -47,7 +47,7 @@ public class AjoutBoissonServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
-			int lastId = Ensemble.getInstance().listerBoissons().get(j-1).getId();
+			int lastId = Ensemble.getInstance().listerBoissons().size();
 
 			
 			if(bool==false){

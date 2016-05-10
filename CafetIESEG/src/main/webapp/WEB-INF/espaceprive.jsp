@@ -101,6 +101,8 @@
                     		</c:forEach>
                     		
                     	</table>
+                    	
+                    	<hr>
      
      	<!--<h3 align="center"><A href="javascript:ouvre_popup('supprimer')">Supprimer un produit</A></h3>
 		<SCRIPT>
@@ -116,6 +118,62 @@
 		   }
 		</SCRIPT>
 					
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+	                    <h2 class="intro-text text-center">
+							<fmt:message key="utilisateur"/>
+	                    </h2>
+                    <hr>
+        
+				                    <table class="table">
+					                    	<thead>
+												<tr class="thead">
+													<th class="th">#</th>
+													<th class="th">Mail</th>
+													<th class="th"><fmt:message key="mdp"/></th>
+													<th class="th"><fmt:message key="modifier"/></th>
+													<th class="th"><fmt:message key="supprimer"/></th>
+												</tr>
+											</thead>
+											 <c:forEach var="utilisateurs" items="${listeUtilisateurs}">
+											<tbody>
+												<tr class="tr">
+													<td class="td">${utilisateurs.id}</td>
+													<td class="td">${utilisateurs.mail}</td>
+													<td class="td">${utilisateurs.motDePasse}</td>
+													<td class="td"><a href="
+								        <c:url value="modifierUtilisateur">
+								  			<c:param name="utilisateurId" value="${utilisateurs.id}"/>
+										</c:url>
+								        " class="glyphicon glyphicon-edit" ></a></td>
+								        
+													<td class="td"><a href="
+								        	<c:url value="supprimerUtilisateur">
+								  				<c:param name="askUtilisateurId" value="${utilisateurs.id}"/>
+											</c:url>
+										" class="glyphicon glyphicon-trash"></a></td>
+												</tr>
+											</tbody>			                    
+											</c:forEach>
+					                    
+					                    
+					                    </table>
+					                    
+					                    <hr>
+		
+        <div  align="center">
+        <h3><fmt:message key="utilisateur.add"/></h3><a href="
+        <c:url value="ajoutUtilisateur">
+		</c:url>
+        " class="glyphicon glyphicon-plus" ></a>
+		</div>
+                
                 </div>
             </div>
         </div>

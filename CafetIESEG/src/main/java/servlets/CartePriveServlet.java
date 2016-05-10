@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Entities.Utilisateur;
+import manager.Ensemble;
 
 @WebServlet("/carteprive")
 public class CartePriveServlet extends GenericServlet {

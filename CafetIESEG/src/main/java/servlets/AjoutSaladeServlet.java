@@ -49,7 +49,7 @@ public class AjoutSaladeServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
-			int lastId = Ensemble.getInstance().listerSalades().get(j-1).getId();
+			int lastId = Ensemble.getInstance().listerSalades().size();
 
 			
 			if(bool==false){

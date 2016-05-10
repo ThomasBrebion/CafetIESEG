@@ -41,78 +41,60 @@
 
 <body>
 
-    <c:import url="language.jsp">
-	</c:import>
-
-    <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
+   <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 
 	<div class="container">
-	<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->
-    <c:import url="nav.jsp">
-	    <c:param name="pageSelectionnee" value="carte"/>
-	</c:import> 
-
-    <div class="container">
-
-        <div class="row">
+    <c:import url="navprive.jsp">
+	    <c:param name="pageSelectionnee" value=""/>
+	</c:import>
+	   
+    <div align="center" class="container">
+    <div class="row">
             <div class="box">
                 <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                    	<fmt:message key="modifier" /> <strong><fmt:message key="user" /></strong>
+                    </h2>
                     
-                    <h1 class="brand-name" align="center"><fmt:message key="platchaud.titre" /></h1>
-					
-                    <hr class="tagline-divider">
-                   
-				   <h3 align="center"><fmt:message key="platchaud.text1" /></h3>
-				   
-                    <hr class="tagline-divider2">
-                    
-                    <table class="table">
-                    
-					                    	<thead>
-												<tr>
-													<th>#</th>
-													<th><fmt:message key="name"/></th>
-													<th><fmt:message key="prix"/></th>
-												</tr>
-											</thead>
-                    
-                    <c:forEach var="plat_chauds" items="${listePlat_chauds}">
-											<tbody>
-												<tr>
-													<td>${plat_chauds.id}</td>
-													<td>${plat_chauds.nom}</td>
-													<td>${plat_chauds.prix_solo}</td>
-												</tr>
-											</tbody>			                    
-											</c:forEach>
-					                    
-					                    
-					                    </table>
-                  
-                  <div class="nextandprevious">
-                  
-                  <div class="gauche">
-                  	<a href="sandwich"><span class="glyphicon glyphicon-arrow-left"></span></a>
-                  </div>
-                  
-                  <div class="droit">
-                  	<a href="salade"><span class="glyphicon glyphicon-arrow-right"></span></a>
-                  </div>
-                  
-                  </div>
-                  
-                  
-                 
-                </div>
-            </div>
-        </div>
-
+                    <hr>
+		
+		<h2>${message}</h2>
+		
+		<c:if test="${ not empty utilisateur }">
+		<form method="post" class="form-horizontal"  accept-charset="ISO-8859-1">
+		<input type="hidden" name="id" id="id" value="${utilisateur.id}">
+					<div class="form-group">
+						<label for="nom2" class="col-sm-2 control-label">Mail : </label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="mail" id="mail" value="${utilisateur.mail}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="date" class="col-sm-2 control-label"><fmt:message key="mdp" /> : </label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="mdp" id="mdp" value="${utilisateur.motDePasse}">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8">
+							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer"/>">
+						</div>
+					</div>
+				</form>
+				</c:if>
     </div>
+    </div>
+    </div>
+    </div>
+    
+    
     <!-- /.container -->
 
     <footer>
@@ -124,13 +106,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
 
 </body>
 

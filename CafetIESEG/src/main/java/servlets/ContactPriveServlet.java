@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Entities.Utilisateur;
+import manager.Ensemble;
 
 @WebServlet("/contactprive")
 public class ContactPriveServlet extends GenericServlet {
@@ -16,6 +20,12 @@ public class ContactPriveServlet extends GenericServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
+		
+		List<Utilisateur> utilisateurs = Ensemble.getInstance().listerUtilisateurs();
+		request.setAttribute("listeUtilisateurs", utilisateurs);
+		
+		String mail = utilisateurs.get(0).getMail();
+		request.getSession().setAttribute("mail", mail);
 
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/contact_prive.jsp");
 		view.forward(request, response);

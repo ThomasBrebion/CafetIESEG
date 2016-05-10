@@ -22,10 +22,10 @@ public class LoginServlet extends HttpServlet {
 		String un=request.getParameter("id");
 		String pw=request.getParameter("mdp");
 		List<Utilisateur> utilisateur = Ensemble.getInstance().listerUtilisateurs();
-		String id = utilisateur.get(0).getIdentifiant();
+		String mail = utilisateur.get(0).getMail();
 		String mdp = utilisateur.get(0).getMotDePasse();
 		
-		if(un.equals(id) && pw.equals(mdp))
+		if(un.equals(mail) && pw.equals(mdp))
 		{
 			response.sendRedirect("espaceprive");
 			return;

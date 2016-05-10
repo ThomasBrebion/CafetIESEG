@@ -62,33 +62,44 @@
 
         <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12">
                     
-                    <h1 class="brand-name"><fmt:message key="sandwich.titre"/></h1>
-
-					<hr class="tagline-divider">
+                    <h1 class="brand-name" align="center"><fmt:message key="sandwich.titre" /></h1>
+					
+                    <hr class="tagline-divider">
                    
-				   <h3><fmt:message key="sandwich.text1"/></h3><h4><fmt:message key="sandwich.text2"/></h4>
+				   <h3 align="center"><fmt:message key="sandwich.text1" /></h3><h4 align="center"><fmt:message key="sandwich.text2" /></h4>
 				   
                     <hr class="tagline-divider2">
                     
-                    <c:forEach var="sandwich" items="${listeSandwichs}">
-                    
-                   		<h5>${sandwich.nom}</h5><p>${sandwich.prix_solo}€</p>
-                   		
-				        <a href="
-				        	<c:url value="supprimerSandwich">
-				  				<c:param name="askSandwichId" value="${sandwich.id}"/>
-							</c:url>
-						" class="glyphicon glyphicon-trash"></a>
-				        
-				        <a href="
+                    <table class="table">
+                    		<tr class="thead">
+                    			<th class="th"><fmt:message key="name"/></th>
+                    			<th class="th"><fmt:message key="prix"/></th>
+                    			<th class="th"><fmt:message key="modifier"/></th>
+                    			<th class="th"><fmt:message key="supprimer"/></th>
+                    		</tr>
+                    		
+                    		<c:forEach var="sandwich" items="${listeSandwichs}">
+                    		
+                    		<tr class="tr">
+                    			<td class="td">${sandwich.nom}</td>
+                    			<td class="td">${sandwich.prix_solo} €</td>
+                    			<td class="td"><a href="
 				        <c:url value="modifierSandwich">
 				  			<c:param name="sandwichId" value="${sandwich.id}"/>
 						</c:url>
-				        " class="glyphicon glyphicon-edit" ></a>
+				        " class="glyphicon glyphicon-edit" ></a></td>
+                    			<td class="td"><a href="
+				        	<c:url value="supprimerSandwich">
+				  				<c:param name="askSandwichId" value="${sandwich.id}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a></td>
+                    		</tr>
                     		
-                    </c:forEach>
+                    		</c:forEach>
+                    		
+                    	</table>
                     
                     <hr>
 		

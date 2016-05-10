@@ -71,17 +71,17 @@
                 </div>
                 <div class="col-md-8">
                     <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
-                    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="700"height="400" src ="https://maps.google.com/maps?hl=fr&q=3 rue de la digue lille&ie=UTF8&t=m&z=16&iwlox=B&output=embed"></iframe>
+                    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="700"height="400" src ="https://maps.google.com/maps?hl=fr&q=3 rue de la digue lille&ie=UTF8&t=m&z=16&iwlox=B&output=embed"></iframe>
                 </div>
                 <div class="col-md-4">
                     <p><fmt:message key="phone"/> :
                         <strong>03 20 54 58 92</strong>
                     </p>
                     <p>Mail:
-                        <strong><a href="mailto:mrobin.carnois@mhei.fr">Mail Cafet'Ieseg</a></strong>
+                        <strong>${mail}</strong>
                     </p>
                     <p><fmt:message key="adresse"/>:
-                        <strong>3 Rue de la Digue
+                        <strong>3 Rue de la Digue 
                             <br>59000 Lille</strong>
                     </p>
                 </div>
@@ -99,7 +99,6 @@
                     <hr>
                     
            <script>
-<!--
 function Email() {
 
   var dest_email = document.contact.dest_email.value;
@@ -137,7 +136,6 @@ function Email() {
     location.href = "mailto:" + dest_email + "?Subject=" + sujet + "&Body= " + message + " %0A%0A  " + nom + " " + prenom + " %0A " + email + " %0A " + numero + " ";
   }
 }
-//-->
 </script>  
 
 					<form name="contact">
@@ -153,7 +151,7 @@ function Email() {
 								</select>
 
                             </div>
-							<input type="hidden" name="dest_email" value="thomas.brebion@hei.fr">
+							<input type="hidden" name="dest_email" value="${mail}">
                             <div class="form-group col-lg-2">
                                 <label><fmt:message key="name"/></label>
                                 <input type="text" id="nom" name="nom" class="form-control">

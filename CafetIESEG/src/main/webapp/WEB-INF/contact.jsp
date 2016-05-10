@@ -76,7 +76,7 @@
                         <strong>03 20 54 58 92</strong>
                     </p>
                     <p>Mail :
-                        <strong>cafetieseg@ieseg.fr</strong>
+                        <strong>${mail}</strong>
                     </p>
                     <p><fmt:message key="adresse"/> :
                         <strong>3 Rue de la Digue
@@ -97,7 +97,6 @@
                     <hr>
                     
            <script>
-<!--
 function Email() {
 
   var dest_email = document.contact.dest_email.value;
@@ -135,7 +134,6 @@ function Email() {
     location.href = "mailto:" + dest_email + "?Subject=" + sujet + "&Body= " + message + " %0A%0A  " + nom + " " + prenom + " %0A " + email + " %0A " + numero + " ";
   }
 }
-//-->
 </script>  
 
 					<form name="contact">
@@ -151,7 +149,7 @@ function Email() {
 								</select>
 
                             </div>
-							<input type="hidden" name="dest_email" value="thomas.brebion@hei.fr">
+							<input type="hidden" name="dest_email" value="${mail}">
                             <div class="form-group col-lg-2">
                                 <label><fmt:message key="name"/></label>
                                 <input type="text" id="nom" name="nom" class="form-control">

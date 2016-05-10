@@ -23,7 +23,7 @@ public class UtilisateurDaoTestCase {
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM `utilisateurs`");
-		stmt.executeUpdate("INSERT INTO `utilisateurs` (`id`, `mdp`) VALUES('admin', 'admin');");
+		stmt.executeUpdate("INSERT INTO `utilisateurs` (`mail`, `mdp`, `id`) VALUES('cafetieseg@ieseg.fr', 'admin',1);");
 		stmt.close();
 		connection.close();
 	}
@@ -32,40 +32,58 @@ public class UtilisateurDaoTestCase {
 	public void testListerUtilisateur() {
 		List<Utilisateur> Utilisateur = UtilisateurDao.listerUtilisateurs();
 		Assert.assertEquals(1, Utilisateur.size());
-		Assert.assertEquals("admin", Utilisateur.get(0).getIdentifiant());
+		Assert.assertEquals(1, Utilisateur.get(0).getId());
+		Assert.assertEquals("cafetieseg@ieseg.fr", Utilisateur.get(0).getMail());
 		Assert.assertEquals("admin", Utilisateur.get(0).getMotDePasse());
 	}
 	
 	@Test
 	public void testGetUtilisateur() {
-		Utilisateur Utilisateur = UtilisateurDao.getUtilisateur("admin");
+		Utilisateur Utilisateur = UtilisateurDao.getUtilisateur(1);
 		Assert.assertNotNull(Utilisateur);
-		Assert.assertEquals("admin", Utilisateur.getIdentifiant());
+		Assert.assertEquals("cafetieseg@ieseg.fr", Utilisateur.getMail());
 		Assert.assertEquals("admin", Utilisateur.getMotDePasse());
 	}
 	
 	@Test
 	public void testGetUtilisateurSansResultat() {
-		Utilisateur Utilisateur = UtilisateurDao.getUtilisateur("");
+		Utilisateur Utilisateur = UtilisateurDao.getUtilisateur(0);
 		Assert.assertNull(Utilisateur);		
 	}
 	
 	@Test
 	public void testAjouterUtilisateur() throws Exception {
-		Utilisateur Utilisateur = new Utilisateur("motdepasse","toto");
+		Utilisateur Utilisateur = new Utilisateur("motdepasse","toto@ieseg.com",2);
 		Utilisateur UtilisateurAjoute = UtilisateurDao.ajouterUtilisateur(Utilisateur);
 		
-		Assert.assertEquals("toto", UtilisateurAjoute.getIdentifiant());
+		Assert.assertEquals("toto@ieseg.com", UtilisateurAjoute.getMail());
 		Assert.assertEquals("motdepasse", UtilisateurAjoute.getMotDePasse());
 		
 		Connection connection = DataSourceProvider.getDataSource().getConnection();
 		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM `utilisateurs` WHERE id = ?");
-		stmt.setString(1, UtilisateurAjoute.getIdentifiant());
+		stmt.setInt(1, UtilisateurAjoute.getId());
 		ResultSet rs = stmt.executeQuery();
 		Assert.assertTrue(rs.next());
-		Assert.assertEquals(UtilisateurAjoute.getIdentifiant(),rs.getString("id"));
+		Assert.assertEquals(UtilisateurAjoute.getMail(),rs.getString("mail"));
 		Assert.assertEquals(UtilisateurAjoute.getMotDePasse(),rs.getString("mdp"));
 		Assert.assertFalse(rs.next());
+		UtilisateurDao.supprimerUtilisateur(2);
 		connection.close();
+	}
+	
+	@Test
+	public void testSupprimerUtilisateur() throws Exception {
+		Utilisateur utilisateur = new Utilisateur("motdepasse","toto@ieseg.com",2);
+		UtilisateurDao.ajouterUtilisateur(utilisateur);
+		
+		int i = UtilisateurDao.listerUtilisateurs().size();
+		Assert.assertEquals(2,i);
+		
+		UtilisateurDao.supprimerUtilisateur(2);
+		int j = UtilisateurDao.listerUtilisateurs().size();
+		Assert.assertEquals(1,j);
+		Utilisateur utilisateur1 = UtilisateurDao.listerUtilisateurs().get(j-1);
+		Assert.assertEquals("cafetieseg@ieseg.fr", utilisateur1.getMail());
+		
 	}
 }

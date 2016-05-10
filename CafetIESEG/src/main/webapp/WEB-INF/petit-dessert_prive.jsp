@@ -62,34 +62,45 @@
 
         <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12">
                     
-                    <h1 class="brand-name"><fmt:message key="petitdessert.titre"/></h1>
-
-					<hr class="tagline-divider">
+                    <h1 class="brand-name" align="center"><fmt:message key="petitdessert.titre" /></h1>
+					
+                    <hr class="tagline-divider">
                    
-				   <h3><fmt:message key="petitdessert.text1"/></h3><h4><fmt:message key="petitdessert.text2"/></h4>
+				   <h3 align="center"><fmt:message key="petitdessert.text1" /></h3><h4 align="center"><fmt:message key="petitdessert.text2" /></h4>
 				   
                     <hr class="tagline-divider2">
                     
-                    <c:forEach var="petit_dessert" items="${listePetit_dessert}">
-                    
-                   		<h5>${petit_dessert.nom}</h5><p>${petit_dessert.prix}€</p>
-                   	
-                   	 <a href="
-				        	<c:url value="supprimerPetit_dessert">
-				  				<c:param name="askPetit_dessertId" value="${petit_dessert.id}"/>
-							</c:url>
-						" class="glyphicon glyphicon-trash"></a>
-				        
-				        <a href="
+                    <table class="table">
+                    		<tr class="thead">
+                    			<th class="th"><fmt:message key="name"/></th>
+                    			<th class="th"><fmt:message key="prix"/></th>
+                    			<th class="th"><fmt:message key="modifier"/></th>
+                    			<th class="th"><fmt:message key="supprimer"/></th>
+                    		</tr>
+                    		
+                    		<c:forEach var="petit_dessert" items="${listePetit_dessert}">
+                    		
+                    		<tr class="tr">
+                    			<td class="td">${petit_dessert.nom}</td>
+                    			<td class="td">${petit_dessert.prix} €</td>
+                    			<td class="td"><a href="
 				        <c:url value="modifierPetitDessert">
 				  			<c:param name="petit_dessertId" value="${petit_dessert.id}"/>
 						</c:url>
-				        " class="glyphicon glyphicon-edit" ></a>
+				        " class="glyphicon glyphicon-edit" ></a></td>
+                    			<td class="td"><a href="
+				        	<c:url value="supprimerPetit_dessert">
+				  				<c:param name="askPetit_dessertId" value="${petit_dessert.id}"/>
+							</c:url>
+						" class="glyphicon glyphicon-trash"></a></td>
+                    		</tr>
                     		
-                    </c:forEach>
-                    
+                    		</c:forEach>
+                    		
+                    	</table>
+                    	
                     <hr>
 					
 			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterPetitDessert')"><fmt:message key="petitdessert.add"/></A></h3>

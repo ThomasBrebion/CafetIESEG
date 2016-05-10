@@ -61,21 +61,38 @@
 
         <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12">
                     
-                     <h1 class="brand-name"><fmt:message key="granddessert.titre"/></h1>
+                    <h1 class="brand-name" align="center"><fmt:message key="granddessert.titre" /></h1>
 					
                     <hr class="tagline-divider">
                    
-				   <h3><fmt:message key="granddessert.text1"/></h3><h4><fmt:message key="granddessert.text2"/></h4>
+				   <h3 align="center"><fmt:message key="granddessert.text1" /></h3><h4 align="center"><fmt:message key="granddessert.text2" /></h4>
 				   
                     <hr class="tagline-divider2">
                     
-                    <c:forEach var="grand_dessert" items="${listeGrand_dessert}">
+                    <table class="table">
                     
-                   		<h5>${grand_dessert.nom}</h5><p>${grand_dessert.prix}€</p>
-                    		
-                    </c:forEach>
+					                    	<thead>
+												<tr>
+													<th>#</th>
+													<th><fmt:message key="name"/></th>
+													<th><fmt:message key="prix"/></th>
+												</tr>
+											</thead>
+                    
+                    <c:forEach var="grand_dessert" items="${listeGrand_dessert}">
+											<tbody>
+												<tr>
+													<td>${grand_dessert.id}</td>
+													<td>${grand_dessert.nom}</td>
+													<td>${grand_dessert.prix}</td>
+												</tr>
+											</tbody>			                    
+											</c:forEach>
+					                    
+					                    
+					                    </table>
                   
                   <div class="nextandprevious">
                   

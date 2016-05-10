@@ -41,93 +41,72 @@
 
 <body>
 
-    <c:import url="language.jsp">
-	</c:import>
-
-    <a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
+  	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
+  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
-    
-    <div class="container">
-	<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
+	
+	<div class="container">
+	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
+	
     <!-- Menu de navigation -->
-    <c:import url="nav.jsp">
-	    <c:param name="pageSelectionnee" value="carte"/>
-	</c:import> 
+    <c:import url="navprive.jsp">
+	    <c:param name="pageSelectionnee" value=""/>
+	</c:import>
 
-    <div class="container">
-
-        <div class="row">
+    <div align="center" class="container">
+    <div class="row">
             <div class="box">
                 <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                    	<fmt:message key="utilisateur.add" />
+                    </h2>
                     
-                    <h1 class="brand-name" align="center"><fmt:message key="boisson.titre" /></h1>
-					
-                    <hr class="tagline-divider">
-                   
-				   <h3 align="center"><fmt:message key="boisson.text1" /></h3><h4 align="center"><fmt:message key="boisson.text2" /></h4>
-				   
-                    <hr class="tagline-divider2">
+                    <hr>
                     
-                    <table class="table">
-                    
-					                    	<thead>
-												<tr>
-													<th>#</th>
-													<th><fmt:message key="name"/></th>
-													<th><fmt:message key="prix"/></th>
-												</tr>
-											</thead>
-                    
-                    <c:forEach var="boisson" items="${listeBoissons}">
-											<tbody>
-												<tr>
-													<td>${boisson.id}</td>
-													<td>${boisson.nom}</td>
-													<td>${boisson.prix}</td>
-												</tr>
-											</tbody>			                    
-											</c:forEach>
-					                    
-					                    
-					                    </table>
-                  
-                  <div class="nextandprevious">
-                  
-                  <div class="gauche">
-                  	<a href="salade"><span class="glyphicon glyphicon-arrow-left"></span></a>
-                  </div>
-                  
-                  <div class="droit">
-                  	<a href="petitdessert"><span class="glyphicon glyphicon-arrow-right"></span></a>
-                  </div>
-                  
-                  </div>
-                 
-                </div>
-            </div>
-        </div>
-
-    </div>
+		<h2>${message}</h2>
+		
+				<form method="post" class="form-horizontal" id="form" name="form">
+					<div class="form-group">
+						<label for="titre" class="col-sm-2 control-label">Mail</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="mail" id="mail">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="titre" class="col-sm-2 control-label"><fmt:message key="mdp" /></label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="mdp" id="mdp">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8">
+							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer" />">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+    
+    
     <!-- /.container -->
 
     <footer>
-		<fmt:message key="footer" />
+		<fmt:message key="footer"/>
     </footer>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    
+    <!-- Money Counter -->
+    <script src="js/moneyCounter.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
 
 </body>
 

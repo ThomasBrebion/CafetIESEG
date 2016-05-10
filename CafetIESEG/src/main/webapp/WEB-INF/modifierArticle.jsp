@@ -93,7 +93,8 @@
 							<input class="btn btn-primary" type="submit" value="<fmt:message key="enregistrer"/>">
 						</div>
 					</div>
-				</form></c:if>
+				</form>				
+				</c:if>
     </div>
     </div>
     </div>

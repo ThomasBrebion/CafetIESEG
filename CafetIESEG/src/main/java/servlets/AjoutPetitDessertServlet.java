@@ -47,7 +47,7 @@ public class AjoutPetitDessertServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
-			int lastId = Ensemble.getInstance().listerPetit_dessert().get(j-1).getId();
+			int lastId = Ensemble.getInstance().listerPetit_dessert().size();
 
 			
 			if(bool==false){

@@ -49,7 +49,7 @@ public class AjoutPlatChaudServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
-			int lastId = Ensemble.getInstance().listerPlat_chauds().get(j-1).getId();
+			int lastId = Ensemble.getInstance().listerPlat_chauds().size();
 
 			
 			if(bool==false){

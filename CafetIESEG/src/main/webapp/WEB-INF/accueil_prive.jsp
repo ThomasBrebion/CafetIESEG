@@ -159,7 +159,7 @@
 		
 		
         <div  align="center">
-        <h3>Ajouter un article</h3><a href="
+        <h3><fmt:message key="article.add"/></h3><a href="
         <c:url value="ajoutArticle">
 		</c:url>
         " class="glyphicon glyphicon-plus" ></a>

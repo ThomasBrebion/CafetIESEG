@@ -249,12 +249,20 @@ public class Ensemble {
 		return utilisateurDao.listerUtilisateurs();
 	}
 
-	public Utilisateur getUtilisateur(String id) {
+	public Utilisateur getUtilisateur(int id) {
 		return utilisateurDao.getUtilisateur(id);
 	}
 
 	public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
 		return utilisateurDao.ajouterUtilisateur(utilisateur);
+	}
+
+	public void majUtilisateur(Utilisateur utilisateur) {
+		utilisateurDao.majUtilisateur(utilisateur);
+	}
+	
+	public void supprimerUtilisateur(int id) {
+		utilisateurDao.supprimerUtilisateur(id);
 	}
 	
 	
