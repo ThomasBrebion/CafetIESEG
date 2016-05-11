@@ -137,6 +137,8 @@
             </div>
         </div>
 		</c:forEach>
+		
+		<hr class="tagline-divider">
 
     </div>
     <!-- /.container -->

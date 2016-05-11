@@ -92,7 +92,6 @@
 	</div>
 	</div>
     
-    
     <!-- /.container -->
 
     <footer>

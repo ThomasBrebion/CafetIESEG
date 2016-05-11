@@ -103,12 +103,8 @@
                     
                     <hr>
 		
-     	<h3 align="center"><A href="javascript:ouvre_popup('ajoutSandwich')"><fmt:message key="sandwich.add"/></A></h3>
-		<SCRIPT>
-		   function ouvre_popup(page) {
-		       window.open(page,"Ajout sandwich","menubar=no, status=no, menubar=no, width=600, height=452");
-		   }
-		</SCRIPT>
+     	
+     				<h3 align="center"><A href="ajouterSandwich"><fmt:message key="sandwich.add"/></A></h3>
                   
                   <div class="nextandprevious">
                   
@@ -124,6 +120,8 @@
                 </div>
               </div>
             </div>
+    
+    <hr class="tagline-divider">
 
     </div>
     <!-- /.container -->

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entities.Sandwich;
 import manager.Ensemble;
 
-@WebServlet("/ajoutSandwich")
+@WebServlet("/ajouterSandwich")
 public class AjoutSandwichServlet extends GenericServlet {
 
 	private static final long serialVersionUID = 6880801727716084460L;
@@ -26,60 +26,122 @@ public class AjoutSandwichServlet extends GenericServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
+
 		String nom = request.getParameter("nom");
-		Double prix_solo = null ;
-		Double prix_menu = null ;
+		Double prixsolo = null ;
+		Double prixmenu = null ;
 		
 		try {
-			prix_solo = Double.parseDouble(request.getParameter("prix_solo"));
-			prix_menu = Double.parseDouble(request.getParameter("prix_menu"));
+			prixsolo = Double.parseDouble(request.getParameter("prix_solo"));
+			prixmenu = Double.parseDouble(request.getParameter("prix_menu"));
 		} catch (NumberFormatException e) {
 
 		}
 
 		int j = Ensemble.getInstance().listerSandwichs().size();
-
-		boolean bool = true;
-		for(int k=0;k<j;k++){
-			if(nom.equals(Ensemble.getInstance().listerSandwichs().get(k).getNom())){
-				bool = false;
+				
+		request.setAttribute("messageErreur", "");
+		boolean Equal = false;
+		for (int k=0;k<j;k++){
+			if(Ensemble.getInstance().listerSandwichs().get(k).getNom().equals(nom))
+			{
+				Equal = true;
 			}
 		}
 		
 		if(j!=0){
 			int lastId = Ensemble.getInstance().listerSandwichs().size();
-
 			
-			if(bool==false){
-				request.getSession().setAttribute("messageErreur", "Ce sandwich existe déjà");
-				response.sendRedirect("ajoutSandwich");
-			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-				response.sendRedirect("ajoutSandwich");
-			} else {
-				Sandwich nouveauSandwich = new Sandwich(nom, prix_solo,prix_menu,lastId+1);
-				Ensemble.getInstance().ajouterSandwich(nouveauSandwich);
-				response.sendRedirect("modificationOK");
+		if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
+			request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-				}
-			else{
-				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-					response.sendRedirect("ajoutSandwich");
-				} else {
-					Sandwich nouveauSandwich = new Sandwich(nom, prix_solo,prix_menu,1);
-					Ensemble.getInstance().ajouterSandwich(nouveauSandwich);
-					response.sendRedirect("modificationOK");
-				}
-				
-			}
-		
-		
-		
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
+			} else if(Equal==true){		
+			request.setAttribute("messageErreur", "Ce sandwich existe déjà !");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	} else {
+			try{
+				Sandwich nouvelSandwich = new Sandwich(nom,prixsolo,prixmenu, lastId+1);
+				Ensemble.getInstance().ajouterSandwich(nouvelSandwich);
+				request.setAttribute("messageErreur", "Sandwich ajouté !");			
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		}
+		else {
+			if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
+				request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				} else if(Equal==true){		
+				request.setAttribute("messageErreur", "Ce sandwich existe déjà !");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} else {
+				try{
+					Sandwich nouvelSandwich = new Sandwich(nom,prixsolo,prixmenu,1);
+					Ensemble.getInstance().ajouterSandwich(nouvelSandwich);
+					request.setAttribute("messageErreur", "Sandwich ajouté !");			
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
+					try {
+						view.forward(request, response);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
+	}
 
 
 	private boolean isNullOrEmpty(String chaine) {

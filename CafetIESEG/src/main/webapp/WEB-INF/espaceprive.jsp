@@ -103,20 +103,8 @@
                     	</table>
                     	
                     	<hr>
-     
-     	<!--<h3 align="center"><A href="javascript:ouvre_popup('supprimer')">Supprimer un produit</A></h3>
-		<SCRIPT>
-		   function ouvre_popup(page) {
-		       window.open(page,"Supprimer produit","menubar=no, status=no, menubar=no, width=600, height=500");
-		   }
-		</SCRIPT>-->
 		
-     	<h3 align="center"><A href="javascript:ouvre_popup('ajout')"><fmt:message key="produit.add"/></A></h3>
-		<SCRIPT>
-		   function ouvre_popup(page) {
-		       window.open(page,"Ajout produit","menubar=no, status=no, menubar=no, width=600, height=500");
-		   }
-		</SCRIPT>
+     	<h3 align="center"><A href="ajout"><fmt:message key="produit.add"/></A></h3>
 					
                 </div>
             </div>
@@ -167,16 +155,13 @@
 					                    
 					                    <hr>
 		
-        <div  align="center">
-        <h3><fmt:message key="utilisateur.add"/></h3><a href="
-        <c:url value="ajoutUtilisateur">
-		</c:url>
-        " class="glyphicon glyphicon-plus" ></a>
-		</div>
+      <h3 align="center"><A href="ajoutUtilisateur"><fmt:message key="utilisateur.add"/></A></h3>
                 
                 </div>
             </div>
         </div>
+		
+		<hr class="tagline-divider">
 	
 	</div>
 	

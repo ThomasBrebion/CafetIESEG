@@ -103,12 +103,8 @@
                     
                     <hr>
 					
-			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterPlatChaud')">Ajouter un plat chaud</A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Ajout plat chaud","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
+			     	
+     				<h3 align="center"><A href="ajouterPlatChaud"><fmt:message key="platchaud.add"/></A></h3>
                   
                   <div class="nextandprevious">
                   
@@ -127,6 +123,8 @@
                 </div>
             </div>
         </div>
+    
+    <hr class="tagline-divider">
 
     </div>
     <!-- /.container -->

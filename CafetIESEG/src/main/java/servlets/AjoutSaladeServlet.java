@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entities.Salades;
 import manager.Ensemble;
 
-@WebServlet("/ajoutSalade")
+@WebServlet("/ajouterSalade")
 public class AjoutSaladeServlet extends GenericServlet {
 
 	private static final long serialVersionUID = 6880801727716084460L;
@@ -26,59 +26,122 @@ public class AjoutSaladeServlet extends GenericServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
+
 		String nom = request.getParameter("nom");
-		Double prix_solo = null ;
-		Double prix_menu = null ;
+		Double prixsolo = null ;
+		Double prixmenu = null ;
 		
 		try {
-			prix_solo = Double.parseDouble(request.getParameter("prix_solo"));
-			prix_menu = Double.parseDouble(request.getParameter("prix_menu"));
+			prixsolo = Double.parseDouble(request.getParameter("prix_solo"));
+			prixmenu = Double.parseDouble(request.getParameter("prix_menu"));
 		} catch (NumberFormatException e) {
 
 		}
 
 		int j = Ensemble.getInstance().listerSalades().size();
-
-		boolean bool = true;
-		for(int k=0;k<j;k++){
-			if(nom.equals(Ensemble.getInstance().listerSalades().get(k).getNom())){
-				bool = false;
+				
+		request.setAttribute("messageErreur", "");
+		boolean Equal = false;
+		for (int k=0;k<j;k++){
+			if(Ensemble.getInstance().listerSalades().get(k).getNom().equals(nom))
+			{
+				Equal = true;
 			}
 		}
 		
 		if(j!=0){
 			int lastId = Ensemble.getInstance().listerSalades().size();
-
 			
-			if(bool==false){
-				request.getSession().setAttribute("messageErreur", "Cette salade existe déjà");
-				response.sendRedirect("ajoutSalade");
-			} else if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-				response.sendRedirect("ajoutSalade");
-			} else {
-				Salades nouveauSalade = new Salades(nom, prix_solo,prix_menu,lastId+1);
-				Ensemble.getInstance().ajouterSalades(nouveauSalade);
-				response.sendRedirect("modificationOK");
+		if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
+			request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-				}
-			else{
-				if (this.isNullOrEmpty(nom) || prix_solo == null || prix_menu == null) {
-					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-					response.sendRedirect("ajoutSalade");
-				} else {
-					Salades nouveauSalades = new Salades(nom, prix_solo,prix_menu,1);
-					Ensemble.getInstance().ajouterSalades(nouveauSalades);
-					response.sendRedirect("modificationOK");
-				}
-				
-			}
-		
-		
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
+			} else if(Equal==true){		
+			request.setAttribute("messageErreur", "Cette salade existe déjà !");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	} else {
+			try{
+				Salades nouvelSalade = new Salades(nom,prixsolo,prixmenu, lastId+1);
+				Ensemble.getInstance().ajouterSalades(nouvelSalade);
+				request.setAttribute("messageErreur", "Salade ajoutée !");			
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		}
+		else {
+			if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
+				request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				} else if(Equal==true){		
+				request.setAttribute("messageErreur", "Cette salade existe déjà !");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} else {
+				try{
+					Salades nouvelSalade = new Salades(nom,prixsolo,prixmenu,1);
+					Ensemble.getInstance().ajouterSalades(nouvelSalade);
+					request.setAttribute("messageErreur", "Salade ajoutée !");			
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSalade.jsp");	
+					try {
+						view.forward(request, response);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
+	}
 
 
 	private boolean isNullOrEmpty(String chaine) {

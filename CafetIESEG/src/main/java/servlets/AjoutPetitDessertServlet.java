@@ -26,8 +26,7 @@ public class AjoutPetitDessertServlet extends GenericServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
+
 		String nom = request.getParameter("nom");
 		Double prix = null ;
 		
@@ -38,45 +37,109 @@ public class AjoutPetitDessertServlet extends GenericServlet {
 		}
 
 		int j = Ensemble.getInstance().listerPetit_dessert().size();
-
-		boolean bool = true;
-		for(int k=0;k<j;k++){
-			if(nom.equals(Ensemble.getInstance().listerPetit_dessert().get(k).getNom())){
-				bool = false;
+				
+		request.setAttribute("messageErreur", "");
+		boolean Equal = false;
+		for (int k=0;k<j;k++){
+			if(Ensemble.getInstance().listerPetit_dessert().get(k).getNom().equals(nom))
+			{
+				Equal = true;
 			}
 		}
 		
 		if(j!=0){
 			int lastId = Ensemble.getInstance().listerPetit_dessert().size();
-
 			
-			if(bool==false){
-				request.getSession().setAttribute("messageErreur", "Ce petit dessert existe déjà");
-				response.sendRedirect("ajouterPetitDessert");
-			} else if (this.isNullOrEmpty(nom) || prix == null) {
-				request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-				response.sendRedirect("ajouterPetitDessert");
-			} else {
-				Petit_dessert nouveauPetit_dessert = new Petit_dessert(nom, prix,lastId+1);
-				Ensemble.getInstance().ajouterPetit_dessert(nouveauPetit_dessert);
-				response.sendRedirect("modificationOK");
+		if (this.isNullOrEmpty(nom) || prix==null) {		
+			request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-				}
-			else{
-				if (this.isNullOrEmpty(nom) || prix == null) {
-					request.getSession().setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");
-					response.sendRedirect("ajouterPetitDessert");
-				} else {
-					Petit_dessert nouveauPetit_dessert = new Petit_dessert(nom, prix,1);
-					Ensemble.getInstance().ajouterPetit_dessert(nouveauPetit_dessert);
-					response.sendRedirect("modificationOK");
-				}
-				
-			}
-		
-		
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
+			} else if(Equal==true){		
+			request.setAttribute("messageErreur", "Ce petit dessert existe déjà !");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	} else {
+			try{
+				Petit_dessert nouvelPetit_dessert = new Petit_dessert(nom,prix, lastId+1);
+				Ensemble.getInstance().ajouterPetit_dessert(nouvelPetit_dessert);
+				request.setAttribute("messageErreur", "Petit dessert ajouté !");			
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		}
+		else {
+			if (this.isNullOrEmpty(nom) || prix==null) {		
+				request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				} else if(Equal==true){		
+				request.setAttribute("messageErreur", "Ce petit dessert existe déjà !");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} else {
+				try{
+					Petit_dessert nouvelPetit_dessert = new Petit_dessert(nom,prix,1);
+					Ensemble.getInstance().ajouterPetit_dessert(nouvelPetit_dessert);
+					request.setAttribute("messageErreur", "Petit dessert ajouté !");			
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutPetitDessert.jsp");	
+					try {
+						view.forward(request, response);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
+	}
 
 
 	private boolean isNullOrEmpty(String chaine) {

@@ -109,6 +109,8 @@
                 </div>
             </div>
         </div>
+    
+    <hr class="tagline-divider">
 
     </div>
     <!-- /.container -->

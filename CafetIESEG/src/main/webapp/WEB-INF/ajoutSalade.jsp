@@ -30,18 +30,44 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
 
-	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 
 <body>
-<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<h3><fmt:message key="salade.add"/></h3>
-				<c:if test="${messageErreur != null}">
-					<div class="alert alert-danger">${messageErreur}</div>
-				</c:if>
+
+  	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
+  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
+    <div class="brand">Cafet'Ieseg</div>
+    <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
+	
+	<div class="container">
+	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
+	</div>
+	
+    <!-- Menu de navigation -->
+    <c:import url="navprive.jsp">
+	    <c:param name="pageSelectionnee" value="carte"/>
+	</c:import>
+
+    <div align="center" class="container">
+    <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                    	<fmt:message key="salade.add" />
+                    </h2>
+                    
+                    <hr>
+                    
+		<h2>${messageErreur}</h2>
+		
 				<form method="post" class="form-horizontal">
 					<div class="form-group">
 						<label for="titre" class="col-sm-2 control-label"><fmt:message key="name"/></label>
@@ -70,6 +96,23 @@
 			</div>
 		</div>
 	</div>
+	</div>
+    
+    <!-- /.container -->
+
+    <footer>
+		<fmt:message key="footer"/>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    
+    <!-- Money Counter -->
+    <script src="js/moneyCounter.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

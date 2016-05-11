@@ -103,12 +103,8 @@
                     	
                     <hr>
 					
-			     	<h3 align="center"><A href="javascript:ouvre_popup('ajouterPetitDessert')"><fmt:message key="petitdessert.add"/></A></h3>
-					<SCRIPT>
-					   function ouvre_popup(page) {
-					       window.open(page,"Ajout petit dessert","menubar=no, status=no, menubar=no, width=600, height=500");
-					   }
-					</SCRIPT>
+			     	
+     				<h3 align="center"><A href="ajouterPetitDessert"><fmt:message key="petitdessert.add"/></A></h3>
                   
                   <div class="nextandprevious">
                   
@@ -125,6 +121,8 @@
                 </div>
             </div>
         </div>
+    
+    <hr class="tagline-divider">
 
     </div>
     <!-- /.container -->
