@@ -40,10 +40,11 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));</script> <!-- script pour le bouton j'aime facebook -->
 
 <body>
 
+	<!-- Choix de la langue -->
     <c:import url="language.jsp">
 	</c:import>
 
@@ -57,7 +58,7 @@
       		<a href="espace"><input type="Button" value="<fmt:message key="espace" />" class="espaceprive" aria-label="Espace Privé"/></a>
 			<a href="https://twitter.com/Ieseg" class="twitter-follow-button" data-show-count="false"></a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			<div class="fb-like" data-href="https://www.facebook.com/CafetIeseg/?fref=ts" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-		</div>
+		</div> <!-- Différents liens -->
    	
 	<!-- Menu de navigation -->
     <c:import url="nav.jsp">
@@ -116,7 +117,7 @@
                 </div>
             </div>
         </div>
-        
+        <!-- Listing des articles de la base de données -->
         <c:forEach var="articles" items="${listeArticles}">
         <div class="row">
             <div class="box">

@@ -50,7 +50,7 @@
 
 	<div class="container">
 	<a href="espaceprive"><input type="Button" value="Administration" class="espaceprive" aria-label="Espace Privé"/></a>
-	<a href="espace"><input type="Button" value="<fmt:message key="deconnecter" />" class="espaceprive" aria-label="Espace Privé"/></a>
+	<a href="deconnexion"><input type="Button" value="<fmt:message key="deconnecter" />" class="espaceprive" aria-label="Espace Privé"/></a>
 	</div>
 	
     <!-- Menu de navigation -->

@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/espace")
+@WebServlet("/espaceeeee")
 public class EspaceServlet extends GenericServlet {
 
 	private static final long serialVersionUID = 6880801727716084460L;

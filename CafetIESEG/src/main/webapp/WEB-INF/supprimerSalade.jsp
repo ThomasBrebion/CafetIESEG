@@ -42,7 +42,6 @@
 <body>
 
   	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
-  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 	

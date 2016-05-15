@@ -93,6 +93,8 @@
 		</div>
 	</div>
 	
+	<hr>
+	
 	<footer>
 		<fmt:message key="footer"/>
     </footer>

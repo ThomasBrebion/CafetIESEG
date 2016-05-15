@@ -77,7 +77,7 @@
                         <div class="col">
                             <div class="form-group col-lg-12">
                                 <label><fmt:message key="identifiant"/></label>
-                                <input required name="id" autofocus type="text" class="form-control">
+                                <input required name="mail" autofocus type="text" class="form-control">
                             </div>
 							
                             <div class="clearfix"></div>

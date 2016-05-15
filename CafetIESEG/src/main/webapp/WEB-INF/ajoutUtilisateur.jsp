@@ -42,7 +42,6 @@
 <body>
 
   	<a href="accueil"><img id="logo" src="img/logo.jpg" /></a>
-  	<A HREF="espace"><fmt:message key="deconnecter" /></A>
     <div class="brand">Cafet'Ieseg</div>
     <div class="address-bar">3 Rue de la Digue | 59000 Lille | 03 20 54 58 92</div>
 	
@@ -72,7 +71,7 @@
 					<div class="form-group">
 						<label for="titre" class="col-sm-2 control-label">Mail</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" name="mail" id="mail">
+							<input type="email" class="form-control" name="mail" id="mail">
 						</div>
 					</div>
 					<div class="form-group">

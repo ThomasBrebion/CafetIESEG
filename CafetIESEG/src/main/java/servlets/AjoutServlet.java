@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,11 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import Entities.Produits;
 import manager.Ensemble;
 
-@WebServlet("/ajout")
+@WebServlet("/ajouter")
 public class AjoutServlet extends GenericServlet {
 
 	private static final long serialVersionUID = 6880801727716084460L;
-	private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,62 +32,128 @@ public class AjoutServlet extends GenericServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String nom = request.getParameter("nom2");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date1=request.getParameter("date");
 		Date date = null;
-		try {
-			date = dateFormat.parse(request.getParameter("date"));
-		} catch (ParseException e) {
-		}
+
 		Integer quantite = null;
 		Double prix = null;
 
 		try {
 			quantite = Integer.parseInt(request.getParameter("quantite2"));
 			prix = Double.parseDouble(request.getParameter("prix"));
+			date = sdf.parse(date1);
 		} catch (NumberFormatException e) {
 
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		int j = Ensemble.getInstance().listerProduits().size();
-
-		boolean bool = true;
-		for(int k=0;k<j;k++){
-			if(nom.equals(Ensemble.getInstance().listerProduits().get(k).getNom())){
-				bool = false;
+		int j = Ensemble.getInstance().listerPlat_chauds().size();
+				
+		request.setAttribute("messageErreur0", "");
+		boolean Equal = false;
+		for (int k=0;k<j;k++){
+			if(Ensemble.getInstance().listerPlat_chauds().get(k).getNom().equals(nom))
+			{
+				Equal = true;
 			}
 		}
 		
 		if(j!=0){
-		int lastId = Ensemble.getInstance().listerProduits().get(j-1).getId();
-
-
-		
-		if(bool==false){
-			request.getSession().setAttribute("messageErreur0", "Ce produit existe déjà");
-			response.sendRedirect("ajout");
-		} else if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {
-			request.getSession().setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");
-			response.sendRedirect("ajout");
-		} else {
-			Produits nouveauProduit = new Produits(lastId+1,nom, quantite, date, prix);
-			Ensemble.getInstance().ajouterProduit(nouveauProduit);
-			response.sendRedirect("modificationOK");
-		}
-			}
-		else{
-			if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {
-				request.getSession().setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");
-				response.sendRedirect("ajout");
-			} else {
-				Produits nouveauProduit = new Produits(1,nom, quantite, date, prix);
-				Ensemble.getInstance().ajouterProduit(nouveauProduit);
-				response.sendRedirect("modificationOK");
-			}
+			int lastId = Ensemble.getInstance().listerPlat_chauds().size();
 			
-		}
-		
-		
-		
+		if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {		
+			request.setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-
+			} else if(Equal==true){		
+			request.setAttribute("messageErreur0", "Ce produit existe déjà !");		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+			try {
+				view.forward(request, response);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	} else {
+			try{
+				Produits nouvelProduit = new Produits(lastId+1,nom, quantite, date, prix);
+				Ensemble.getInstance().ajouterProduit(nouvelProduit);
+				request.setAttribute("messageErreur0", "Produit ajouté !");			
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		}
+		else {
+			if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {		
+				request.setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				} else if(Equal==true){		
+				request.setAttribute("messageErreur0", "Ce produit existe déjà !");		
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+				try {
+					view.forward(request, response);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		} else {
+				try{
+					Produits nouvelProduit = new Produits(1,nom, quantite, date, prix);
+					Ensemble.getInstance().ajouterProduit(nouvelProduit);
+					request.setAttribute("messageErreur0", "Produit ajouté !");			
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
+					try {
+						view.forward(request, response);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
+	}
 
 
 	private boolean isNullOrEmpty(String chaine) {
