@@ -75,7 +75,6 @@
                     
 					                    	<thead>
 												<tr>
-													<th>#</th>
 													<th><fmt:message key="name"/></th>
 													<th><fmt:message key="prix"/></th>
 												</tr>
@@ -84,7 +83,6 @@
                     <c:forEach var="plat_chauds" items="${listePlat_chauds}">
 											<tbody>
 												<tr>
-													<td>${plat_chauds.id}</td>
 													<td>${plat_chauds.nom}</td>
 													<td>${plat_chauds.prix_solo}</td>
 												</tr>

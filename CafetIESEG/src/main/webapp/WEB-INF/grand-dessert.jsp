@@ -75,7 +75,6 @@
                     
 					                    	<thead>
 												<tr>
-													<th>#</th>
 													<th><fmt:message key="name"/></th>
 													<th><fmt:message key="prix"/></th>
 												</tr>
@@ -84,7 +83,6 @@
                     <c:forEach var="grand_dessert" items="${listeGrand_dessert}">
 											<tbody>
 												<tr>
-													<td>${grand_dessert.id}</td>
 													<td>${grand_dessert.nom}</td>
 													<td>${grand_dessert.prix}</td>
 												</tr>

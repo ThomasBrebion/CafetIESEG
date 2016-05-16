@@ -74,6 +74,7 @@
                     
                     <table class="table">
                     		<tr class="thead">
+                    			<th class="th">#</th>
                     			<th class="th"><fmt:message key="name"/></th>
                     			<th class="th"><fmt:message key="prix"/></th>
                     			<th class="th"><fmt:message key="modifier"/></th>
@@ -83,6 +84,7 @@
                     		<c:forEach var="boisson" items="${listeBoissons}">
                     		
                     		<tr class="tr">
+                    			<td class="td">${boisson.id}</td>
                     			<td class="td">${boisson.nom}</td>
                     			<td class="td">${boisson.prix} €</td>
                     			<td class="td"><a href="

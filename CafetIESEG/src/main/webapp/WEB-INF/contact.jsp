@@ -82,6 +82,11 @@
                         <strong>3 Rue de la Digue
                             <br>59000 Lille</strong>
                     </p>
+                    <p>
+                    	<strong><fmt:message key="lundi&mardi"/></strong> 09h - 15h<br>
+                    	<strong><fmt:message key="jeudi"/></strong> 09h - 14h30<br>
+                    	<strong><fmt:message key="vendredi"/></strong> 09h - 15h<br>
+                    </p>
                 </div>
                 <div class="clearfix"></div>
             </div>

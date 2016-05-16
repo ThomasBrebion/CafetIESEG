@@ -124,7 +124,6 @@
 												<tr class="thead">
 													<th class="th">#</th>
 													<th class="th">Mail</th>
-													<th class="th"><fmt:message key="mdp"/></th>
 													<th class="th"><fmt:message key="modifier"/></th>
 													<th class="th"><fmt:message key="supprimer"/></th>
 												</tr>
@@ -134,7 +133,6 @@
 												<tr class="tr">
 													<td class="td">${utilisateurs.id}</td>
 													<td class="td">${utilisateurs.mail}</td>
-													<td class="td">${utilisateurs.motDePasse}</td>
 													<td class="td"><a href="
 								        <c:url value="modifierUtilisateur">
 								  			<c:param name="utilisateurId" value="${utilisateurs.id}"/>

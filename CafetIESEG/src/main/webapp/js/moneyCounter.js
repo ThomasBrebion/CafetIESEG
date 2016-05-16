@@ -11,6 +11,10 @@ setPrix();
 
 function setPrix()
 {
+	
+	/* Fonction js pour pouvoir afficher le prix d'un menu composé par l'utilisateur sur la page composer son menu */
+	
+	
 	var prix = 0;
 
 	var selectedPlat_chaud = $('#selectPlat_chauds option:selected').text();
@@ -39,33 +43,6 @@ function setPrix()
 		if (listeSandwichs[i].nom == selectedPlat_chaud)
 			prix += listeSandwichs[i].prix_menu;
 	}
-
-	// var selectedPetit_dessert = $('#selectPetit_dessert option:selected').text();
-	// console.log(listePetit_dessert);
-	// for (i = 0; i < listePetit_dessert.length; i++)
-	// {
-	// 	console.log(listePetit_dessert[i].nom);
-	// 	if (listePetit_dessert[i].nom == selectedPetit_dessert)
-	// 		prix += listePetit_dessert[i].prix;
-	// }
-
-	// var selectedGrand_dessert = $('#selectGrand_dessert option:selected').text();
-	// console.log(listeGrand_dessert);
-	// for (i = 0; i < listeGrand_dessert.length; i++)
-	// {
-	// 	console.log(listeGrand_dessert[i].nom);
-	// 	if (listeGrand_dessert[i].nom == selectedGrand_dessert)
-	// 		prix += listeGrand_dessert[i].prix;
-	// }
-
-	// var selectedBoissons = $('#selectBoissons option:selected').text();
-	// console.log(listeBoissons);
-	// for (i = 0; i < listeBoissons.length; i++)
-	// {
-	// 	console.log(listeBoissons[i].nom);
-	// 	if (listeBoissons[i].nom == selectedBoissons)
-	// 		prix += listeBoissons[i].prix;
-	// }
 
 	console.log(prix);
 	$('#prixFinal').html(prix.toFixed(2));
