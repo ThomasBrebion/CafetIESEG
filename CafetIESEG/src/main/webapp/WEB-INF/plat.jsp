@@ -84,7 +84,7 @@
 											<tbody>
 												<tr>
 													<td>${plat_chauds.nom}</td>
-													<td>${plat_chauds.prix_solo}</td>
+													<td>${plat_chauds.prix_solo} €</td>
 												</tr>
 											</tbody>			                    
 											</c:forEach>

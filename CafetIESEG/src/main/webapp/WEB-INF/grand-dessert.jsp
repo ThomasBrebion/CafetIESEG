@@ -67,7 +67,7 @@
 					
                     <hr class="tagline-divider">
                    
-				   <h3 align="center"><fmt:message key="granddessert.text1" /></h3><h4 align="center"><fmt:message key="granddessert.text2" /></h4>
+				   <h3 align="center"><fmt:message key="granddessert.text1" /></h3>
 				   
                     <hr class="tagline-divider2">
                     
@@ -84,7 +84,7 @@
 											<tbody>
 												<tr>
 													<td>${grand_dessert.nom}</td>
-													<td>${grand_dessert.prix}</td>
+													<td>${grand_dessert.prix} €</td>
 												</tr>
 											</tbody>			                    
 											</c:forEach>

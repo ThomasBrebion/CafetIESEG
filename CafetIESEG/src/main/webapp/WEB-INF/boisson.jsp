@@ -66,7 +66,7 @@
 					
                     <hr class="tagline-divider">
                    
-				   <h3 align="center"><fmt:message key="boisson.text1" /></h3><h4 align="center"><fmt:message key="boisson.text2" /></h4>
+				   <h3 align="center"><fmt:message key="boisson.text1" /></h3>
 				   
                     <hr class="tagline-divider2">
                     
@@ -83,7 +83,7 @@
 											<tbody>
 												<tr>
 													<td>${boisson.nom}</td>
-													<td>${boisson.prix}</td>
+													<td>${boisson.prix} €</td>
 												</tr>
 											</tbody>			                    
 											</c:forEach>

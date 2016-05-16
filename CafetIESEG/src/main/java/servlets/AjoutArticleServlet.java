@@ -15,7 +15,7 @@ import manager.Ensemble;
 /**
  * Servlet implementation class SupprimerArticleServlet
  */
-@WebServlet("/ajoutArticle")
+@WebServlet("/ajouterArticle")
 public class AjoutArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

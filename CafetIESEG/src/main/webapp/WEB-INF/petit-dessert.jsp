@@ -84,7 +84,7 @@
 											<tbody>
 												<tr>
 													<td>${petit_dessert.nom}</td>
-													<td>${petit_dessert.prix}</td>
+													<td>${petit_dessert.prix} €</td>
 												</tr>
 											</tbody>			                    
 											</c:forEach>

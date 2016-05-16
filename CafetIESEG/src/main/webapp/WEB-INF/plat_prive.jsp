@@ -68,7 +68,7 @@
 					
                     <hr class="tagline-divider">
                    
-				   <h3 align="center"><fmt:message key="platchaud.text1" /></h3><h4 align="center"><fmt:message key="platchaud.text2" /></h4>
+				   <h3 align="center"><fmt:message key="platchaud.text1" /></h3>
 				   
                     <hr class="tagline-divider2">
                     

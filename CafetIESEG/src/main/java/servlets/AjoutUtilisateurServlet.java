@@ -99,7 +99,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 	} else {
 			try{
 				/*Ajout de l'utilisateur avec l'id du dernier utilisateur +1*/
-				Utilisateur nouvelUtilisateur = new Utilisateur(sMail,sMdp, lastId+1);
+				Utilisateur nouvelUtilisateur = new Utilisateur(sMdp,sMail, lastId+1);
 				Ensemble.getInstance().ajouterUtilisateur(nouvelUtilisateur);
 				request.setAttribute("message", "Utilisateur ajouté !");			
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutUtilisateur.jsp");	
@@ -146,7 +146,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 		} else {
 				try{
 					/*Id à 1 car il s'agit du premier utilisateur ajouté à la bdd*/
-					Utilisateur nouvelUtilisateur = new Utilisateur(sMail,sMdp,1);
+					Utilisateur nouvelUtilisateur = new Utilisateur(sMdp,sMail,1);
 					Ensemble.getInstance().ajouterUtilisateur(nouvelUtilisateur);
 					request.setAttribute("message", "Utilisateur ajouté !");			
 					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutUtilisateur.jsp");	

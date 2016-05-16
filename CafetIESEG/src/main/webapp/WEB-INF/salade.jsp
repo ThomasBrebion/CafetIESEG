@@ -84,7 +84,7 @@
 											<tbody>
 												<tr>
 													<td>${salades.nom}</td>
-													<td>${salades.prix_solo}</td>
+													<td>${salades.prix_solo} €</td>
 												</tr>
 											</tbody>			                    
 											</c:forEach>

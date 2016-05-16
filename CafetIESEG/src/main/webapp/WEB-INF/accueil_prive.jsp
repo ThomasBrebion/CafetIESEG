@@ -157,13 +157,7 @@
 	            <div class="box">
 	                <div class="col-lg-12">
 		
-		
-        <div  align="center">
-        <h3><fmt:message key="article.add"/></h3><a href="
-        <c:url value="ajoutArticle">
-		</c:url>
-        " class="glyphicon glyphicon-plus" ></a>
-		</div>
+		<h3 align="center"><A href="ajouterArticle"><fmt:message key="article.add"/></A></h3>
 		
 					</div>
 	            </div>
