@@ -66,6 +66,7 @@ public class ModifierBoissonServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		Integer sId = Integer.parseInt(request.getParameter("id"));
 		String sNom = request.getParameter("nom");
@@ -73,6 +74,7 @@ public class ModifierBoissonServlet extends HttpServlet {
 		
 		
 		try {
+			/*Mise à jour*/
 			Boissons boisson = new Boissons(sNom, sPrix,sId);
 			Ensemble.getInstance().majBoissons(boisson);
 			request.setAttribute("message", "Boisson mis a jour ! / Boisson updated !");			

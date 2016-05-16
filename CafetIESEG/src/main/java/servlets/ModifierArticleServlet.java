@@ -71,6 +71,7 @@ public class ModifierArticleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		String sId = request.getParameter("id");
 		String sTitre = request.getParameter("titre");
@@ -78,6 +79,7 @@ public class ModifierArticleServlet extends HttpServlet {
 		String sText = request.getParameter("text");
 		
 		try {
+			/*Mise à jour*/
 			Article article = new Article(Integer.parseInt(sId), sText, sAuteur, sTitre);
 			Ensemble.getInstance().majArticle(article);
 			request.setAttribute("message", "Article mis a jour !");			

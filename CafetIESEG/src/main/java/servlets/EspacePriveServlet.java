@@ -22,9 +22,11 @@ public class EspacePriveServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des produits et mise en attribut*/
 		List<Produits> produits = Ensemble.getInstance().listerProduits();
 		request.setAttribute("listeProduits", produits);
 		
+		/*Listing des utilisateurs et mise en attribut*/
 		List<Utilisateur> utilisateurs = Ensemble.getInstance().listerUtilisateurs();
 		request.setAttribute("listeUtilisateurs", utilisateurs);
 

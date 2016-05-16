@@ -11,8 +11,12 @@ import java.util.List;
 import Entities.Article;
 import dao.ArticleDao;
 
+/* Méthodes pour les articles */
+
 
 public class ArticleDaoImpl implements ArticleDao {
+	
+	/* Cette méthode permet de lister tous les articles de la base de donnée pour pouvoir les affichers dans l'accueil */
 
 	@Override
 	public List<Article> listerArticles() {
@@ -33,8 +37,12 @@ public class ArticleDaoImpl implements ArticleDao {
 		return listeDeArticle;
 	}
 
+
 	@Override
 	public Article getArticle(Integer id) {
+		
+		/* Cette méthode permet de sélectionner un article grâce à son Id */
+		
 		Article article = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -51,9 +59,13 @@ public class ArticleDaoImpl implements ArticleDao {
 		}
 		return article;
 	}
-
+	
+	
 	@Override
 	public Article ajouterArticle(Article article) {
+		
+		/* Cette méthode permet d'ajouter un article sur la page d'accueil /*
+		/* L'administrateur renseigne le nom de l'article, le texte, l'id ainsi que l'auteur */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -72,8 +84,11 @@ public class ArticleDaoImpl implements ArticleDao {
 		return article;
 	}
 
+	
 	@Override
 	public void supprimerArticle(int id) {
+		
+		/* Cette méthode permet de supprimer un article sur la page d'accueil */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -88,8 +103,12 @@ public class ArticleDaoImpl implements ArticleDao {
 		}		
 		}
 	
+
 	@Override
 	public void majArticle(Article article) {
+		
+		/* Cette méthode permet de modifier un article sur la page d'accueil */
+		
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

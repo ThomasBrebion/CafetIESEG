@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'une salade et méthodes pour récupérer les propriétés */
+
 public class Salades {
 
 	private String nom;

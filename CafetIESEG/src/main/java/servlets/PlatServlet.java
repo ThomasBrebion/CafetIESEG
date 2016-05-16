@@ -21,6 +21,7 @@ public class PlatServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des plats chauds et mise en attribut*/		
 		List<Plat_chaud> plat_chauds = Ensemble.getInstance().listerPlat_chauds();
 		request.setAttribute("listePlat_chauds", plat_chauds);
 

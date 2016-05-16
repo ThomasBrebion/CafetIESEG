@@ -21,6 +21,7 @@ public class AccueilPriveServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des articles et mise en attribut*/
 		List<Article> articles = Ensemble.getInstance().listerArticles();
 		request.setAttribute("listeArticles", articles);
 

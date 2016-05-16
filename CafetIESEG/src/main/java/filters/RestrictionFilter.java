@@ -39,8 +39,10 @@ import java.io.IOException;
         "/modifierProduit",
         "/espaceprive",
         "/accueilprive",
+        "/menuprive",
+        "/contactprive",
         "/carteprive",
-        "/boissonsprive",
+        "/boissonprive",
         "/granddessertprive",
         "/petitdessertprive",
         "/platprive",
@@ -56,11 +58,12 @@ public class RestrictionFilter implements Filter {
             ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) req;
 
+		//Récuperation des attributs
 		String identifiant = (String) httpRequest.getSession().getAttribute("utilisateurConnecte");
 		Integer id_utilisateur = (Integer) httpRequest.getSession().getAttribute("id_utilisateur");
 
 		if (identifiant == null || "".equals(identifiant)) {
-
+			//Non connecté
 			System.err.println("Il faut être connecté pour accéder à cette page !\n");
 
 			HttpServletResponse httpResponse = (HttpServletResponse) res;
@@ -69,7 +72,7 @@ public class RestrictionFilter implements Filter {
 		}
 		
 		if (id_utilisateur != Ensemble.getInstance().listerUtilisateurs().get(0).getId()) {
-
+			//Non connecté
 			System.err.println("Seuls les administrateurs peuvent accéder à cette page !\n");
 
 			HttpServletResponse httpResponse = (HttpServletResponse) res;
@@ -77,7 +80,7 @@ public class RestrictionFilter implements Filter {
 			return;
 		}
 		
-		
+		//Connecté, renvoie vers la page recherchée
 		chain.doFilter(req, res);
 
 	}

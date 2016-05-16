@@ -6,6 +6,7 @@
     import java.sql.ResultSet;  
     import java.sql.SQLException;  
       
+  
     public class Connect {  
         public static boolean validate(String name, String pass) {          
             boolean status = false;  

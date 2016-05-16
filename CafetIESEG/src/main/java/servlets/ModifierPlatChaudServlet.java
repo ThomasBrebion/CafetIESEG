@@ -66,6 +66,7 @@ public class ModifierPlatChaudServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		Integer sId = Integer.parseInt(request.getParameter("id"));
 		String sNom = request.getParameter("nom");
@@ -73,6 +74,7 @@ public class ModifierPlatChaudServlet extends HttpServlet {
 		Double sPrix_menu = Double.parseDouble(request.getParameter("prix_menu"));
 				
 		try {
+			/*Mise à jour*/
 			Plat_chaud plat_chaud = new Plat_chaud(sNom, sPrix_solo,sPrix_menu,sId);
 			Ensemble.getInstance().majPlat_chaud(plat_chaud);
 			request.setAttribute("message", "Petit dessert mis a jour ! / Petit dessert updated !");			

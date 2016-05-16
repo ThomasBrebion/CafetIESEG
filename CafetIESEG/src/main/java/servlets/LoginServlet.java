@@ -24,8 +24,10 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		
+		/*création d'une Hashmap regroupant les utilisateurs de la bdd*/
 		utilisateursAutorises = new HashMap<>();
 
+		/*Ajout des utilisateurs à la Hashmap*/
 		List<Utilisateur> utilisateurs = Ensemble.getInstance().listerUtilisateurs();
 		for (int i = 0; i < utilisateurs.size(); i++) {
 			utilisateursAutorises.put(utilisateurs.get(i).getMail(), utilisateurs.get(i).getMotDePasse());
@@ -38,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		/*Récupération des attributs de la session*/
 		String utilisateur = (String) request.getSession().getAttribute("utilisateurConnecte");
 		Integer id_utilisateur = (Integer) request.getSession().getAttribute("id_utilisateur");
 

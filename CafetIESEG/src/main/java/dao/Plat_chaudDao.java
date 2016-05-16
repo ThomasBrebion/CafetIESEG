@@ -1,8 +1,10 @@
 package dao;
 
 import java.util.List;
-
 import Entities.Plat_chaud;
+
+/* Interface avec toutes les méthodes utilisée pour les plats chauds */
+
 
 public interface Plat_chaudDao {
 	public List<Plat_chaud> listerPlat_chaud();

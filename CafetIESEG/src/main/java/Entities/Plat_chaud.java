@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un plat chaud et méthodes pour récupérer les propriétés */
+
 public class Plat_chaud {
 
 	private int id;

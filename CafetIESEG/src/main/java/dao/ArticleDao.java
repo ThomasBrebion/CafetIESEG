@@ -1,8 +1,9 @@
 package dao;
 
 import java.util.List;
-
 import Entities.Article;
+
+/* Interface avec toutes les méthodes utilisée pour les articles */
 
 public interface ArticleDao {
 	public List<Article> listerArticles();

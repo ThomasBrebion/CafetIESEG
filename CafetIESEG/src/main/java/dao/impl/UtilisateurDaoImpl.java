@@ -7,15 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import Entities.Utilisateur;
 import dao.UtilisateurDao;
 
+/* Méthodes pour les utilisateurs */
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public List<Utilisateur> listerUtilisateurs() {
+		
+		/* Cette méthode permet de lister tous les utilisateurs dans l'espace privé */
+		
 		List<Utilisateur> listeDeUtilisateur = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -35,6 +38,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public Utilisateur getUtilisateur(int id) {
+		
+		/* Cette méthode permet de sélectionner un utilisateur */
+		
 		Utilisateur utilisateur = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -55,6 +61,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
 		
+		/* Cette méthode permet d'ajouter un utilisateur */
+		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `utilisateurs`(`mail`,`mdp`,`id`)VALUES(?,?,?);", Statement.RETURN_GENERATED_KEYS);
@@ -74,6 +82,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public void majUtilisateur(Utilisateur utilisateur) {
 		
+		/* Cette méthode permet de modifier les données d'un utilisateurs */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("UPDATE `utilisateurs` SET `mail`=?,`mdp`=? WHERE `id`=?");
@@ -90,6 +100,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public void supprimerUtilisateur(int id) {
+		
+		/* Cette méthode permet de supprimer un utilisateur de la base de donnée */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

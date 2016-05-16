@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un article et méthodes pour récupérer les propriétés */
+
 public class Article {
 
     private Integer id;

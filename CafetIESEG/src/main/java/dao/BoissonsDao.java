@@ -1,9 +1,9 @@
 package dao;
 
 import java.util.List;
-
 import Entities.Boissons;
 
+/* Interface avec toutes les méthodes utilisée pour les boissons */
 public interface BoissonsDao {
 	public List<Boissons> listerBoissons();
 

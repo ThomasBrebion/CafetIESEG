@@ -28,6 +28,7 @@ public class MenuServlet extends GenericServlet {
 		super.doGet(request, response);
 		com.google.gson.Gson gson = new com.google.gson.Gson();
 
+		/*Listing des produits de la carte et mise en attribut "normaux" et json*/
 		List<Boissons> boissons = Ensemble.getInstance().listerBoissons();
 		request.setAttribute("listeBoissons", boissons);
 		request.setAttribute("JSONlisteBoissons", gson.toJson(boissons));

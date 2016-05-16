@@ -27,6 +27,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		/*Récuperation des paramètres*/
 		String nom = request.getParameter("nom");
 		Double prixsolo = null ;
 		Double prixmenu = null ;
@@ -41,6 +42,8 @@ public class AjoutSandwichServlet extends GenericServlet {
 		int j = Ensemble.getInstance().listerSandwichs().size();
 				
 		request.setAttribute("messageErreur", "");
+		
+		/*On vérifie qu'il ne s'agit pas d'un nom qui existe déjà*/
 		boolean Equal = false;
 		for (int k=0;k<j;k++){
 			if(Ensemble.getInstance().listerSandwichs().get(k).getNom().equals(nom))
@@ -50,6 +53,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 		}
 		
 		if(j!=0){
+			/*S'il y a déjà des sandwichs dans la bdd*/
 			int lastId = Ensemble.getInstance().listerSandwichs().size();
 			
 		if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
@@ -66,6 +70,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 		e.printStackTrace();
 	}
 			} else if(Equal==true){		
+				/*Si le nom existe déjà*/
 			request.setAttribute("messageErreur", "Ce sandwich existe déjà !");		
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
 			try {
@@ -80,6 +85,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 	}
 	} else {
 			try{
+				/*Ajout du sandwich avec l'id du dernier sandwich +1*/
 				Sandwich nouvelSandwich = new Sandwich(nom,prixsolo,prixmenu, lastId+1);
 				Ensemble.getInstance().ajouterSandwich(nouvelSandwich);
 				request.setAttribute("messageErreur", "Sandwich ajouté !");			
@@ -97,6 +103,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 		}
 		}
 		else {
+			/*S'il n'y a pas de sandwichs dans la bdd*/
 			if (this.isNullOrEmpty(nom) || prixsolo==null || prixmenu==null) {		
 				request.setAttribute("messageErreur", "Un des champs du formulaire n'a pas été bien renseigné");		
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutSandwich.jsp");	
@@ -125,6 +132,7 @@ public class AjoutSandwichServlet extends GenericServlet {
 		}
 		} else {
 				try{
+					/*Id à 1 car il s'agit du premier sandwich ajouté à la bdd*/
 					Sandwich nouvelSandwich = new Sandwich(nom,prixsolo,prixmenu,1);
 					Ensemble.getInstance().ajouterSandwich(nouvelSandwich);
 					request.setAttribute("messageErreur", "Sandwich ajouté !");			

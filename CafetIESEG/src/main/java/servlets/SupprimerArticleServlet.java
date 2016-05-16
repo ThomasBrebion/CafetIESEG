@@ -54,7 +54,6 @@ public class SupprimerArticleServlet extends HttpServlet {
 			}
 			else
 			{
-				//Ensemble.getInstance().supprimerArticle(articleId);
 				message = "Voulez-vous supprimer l'article avec l'id " + articleId + " ? ";
 				asksConfirmation = true;
 			}

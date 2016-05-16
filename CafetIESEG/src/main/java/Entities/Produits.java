@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un produit et méthodes pour récupérer les propriétés */
+
 import java.util.Date;
 
 public class Produits {

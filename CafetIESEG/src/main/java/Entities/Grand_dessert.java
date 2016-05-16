@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un grand dessert et méthodes pour récupérer les propriétés */
+
 public class Grand_dessert {
 
 	private int id;

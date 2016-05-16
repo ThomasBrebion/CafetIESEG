@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un utilisateur et méthodes pour récupérer les propriétés */
+
 public class Utilisateur {
 
     private String mdp;

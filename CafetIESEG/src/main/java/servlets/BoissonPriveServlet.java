@@ -20,7 +20,8 @@ public class BoissonPriveServlet extends GenericServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-
+		
+		/*Listing des boissons et mise en attribut*/
 		List<Boissons> boissons = Ensemble.getInstance().listerBoissons();
 		request.setAttribute("listeBoissons", boissons);
 

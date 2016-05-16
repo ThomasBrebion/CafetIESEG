@@ -70,6 +70,7 @@ public class ModifierProduitServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		String sId = request.getParameter("id");
 		String sNom = request.getParameter("nom2");
@@ -80,6 +81,7 @@ public class ModifierProduitServlet extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		
 		try {
+			/*Mise à jour*/
 			Produits produit = new Produits(Integer.parseInt(sId), sNom, Integer.parseInt(sQuantite), 
 					format.parse(sDate_peremption), Double.parseDouble(sPrix));
 			Ensemble.getInstance().majProduit(produit);

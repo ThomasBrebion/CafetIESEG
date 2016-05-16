@@ -66,6 +66,7 @@ public class ModifierSandwichServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		Integer sId = Integer.parseInt(request.getParameter("id"));
 		String sNom = request.getParameter("nom");
@@ -73,6 +74,7 @@ public class ModifierSandwichServlet extends HttpServlet {
 		Double sPrix_menu = Double.parseDouble(request.getParameter("prix_menu"));
 		
 		try {
+			/*Mise à jour*/
 			Sandwich sandwich = new Sandwich(sNom, sPrix_solo, sPrix_menu,sId);
 			Ensemble.getInstance().majSandwich(sandwich);
 			request.setAttribute("message", "Sandwich mis a jour ! / Sandwich updated !");			

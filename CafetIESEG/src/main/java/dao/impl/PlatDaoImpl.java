@@ -11,11 +11,15 @@ import java.util.List;
 import Entities.Plat;
 import dao.PlatDao;
 
+/* Méthode pour plats */
 
 public class PlatDaoImpl implements PlatDao {
 
 	@Override
 	public List<Plat> listerPlat() {
+		
+		/* Cette méthode permet de lister les plats */
+		
 		List<Plat> listeDePlat = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -35,6 +39,9 @@ public class PlatDaoImpl implements PlatDao {
 
 	@Override
 	public Plat getPlat(String nom) {
+		
+		/* Cette méthode permet sélectionner un plat grâce à son nom */
+		
 		Plat plat = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

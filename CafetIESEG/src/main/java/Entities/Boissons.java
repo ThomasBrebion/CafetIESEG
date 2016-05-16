@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'une boisson et méthodes pour récupérer les propriétés */
+
 public class Boissons {
 
     private int id;

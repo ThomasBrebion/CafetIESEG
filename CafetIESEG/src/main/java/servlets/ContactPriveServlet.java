@@ -21,9 +21,11 @@ public class ContactPriveServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des utilisateurs et mise en attribut*/
 		List<Utilisateur> utilisateurs = Ensemble.getInstance().listerUtilisateurs();
 		request.setAttribute("listeUtilisateurs", utilisateurs);
-		
+
+		/*Mise en attribut du mail du premier utilisateur = administrateur (pour l'instant il n'y a qu'un utilisateur)*/
 		String mail = utilisateurs.get(0).getMail();
 		request.getSession().setAttribute("mail", mail);
 

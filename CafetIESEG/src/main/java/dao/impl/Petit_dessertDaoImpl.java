@@ -11,11 +11,15 @@ import java.util.List;
 import Entities.Petit_dessert;
 import dao.Petit_dessertDao;
 
+/* Méthode pour les petits desserts */
 
 public class Petit_dessertDaoImpl implements Petit_dessertDao {
 
 	@Override
 	public List<Petit_dessert> listerPetit_dessert() {
+		
+		/* Cette méthode permet de lister tous les petits desserts, elle est utilisée pour la carte de la Cafet */
+		
 		List<Petit_dessert> listeDePetit_dessert = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -35,6 +39,9 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 
 	@Override
 	public Petit_dessert getPetit_dessert(int id) {
+		
+		/* Cette méthode permet de sélectionner un petit dessert grâce à son Id */
+		
 		Petit_dessert petit_dessert = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -55,6 +62,8 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 	@Override
 	public Petit_dessert ajouterPetit_dessert(Petit_dessert petit_dessert) {
 		
+		/* Cette méthode permet d'ajouter un petit dessert, elle est utilisée pour la carte de la Cafet */
+		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `petit_dessert`(`nom`,`prix`,`id`)VALUES(?,?,?);", Statement.RETURN_GENERATED_KEYS);
@@ -74,6 +83,8 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 	@Override
 	public void supprimerPetit_dessert(int id) {
 		
+		/* Cette méthode permet de supprimer un petit dessert, elle est utilisée pour la carte de la Cafet */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `petit_dessert` WHERE `id`=?");
@@ -89,6 +100,8 @@ public class Petit_dessertDaoImpl implements Petit_dessertDao {
 
 	@Override
 	public void majPetit_dessert(Petit_dessert petit_dessert) {
+		
+		/* Cette méthode permet de modifier un petit dessert, elle est utilisée pour la carte de la Cafet */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

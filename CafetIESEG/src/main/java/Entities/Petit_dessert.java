@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un petit dessert et méthodes pour récupérer les propriétés */
+
 public class Petit_dessert {
 
 	private String nom;

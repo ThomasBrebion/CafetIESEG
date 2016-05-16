@@ -21,6 +21,7 @@ public class PetitDessertServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des petit desserts et mise en attribut*/
 		List<Petit_dessert> petit_dessert = Ensemble.getInstance().listerPetit_dessert();
 		request.setAttribute("listePetit_dessert", petit_dessert);
 

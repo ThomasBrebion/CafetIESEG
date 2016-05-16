@@ -11,6 +11,7 @@ import java.util.List;
 import Entities.Plat_chaud;
 import dao.Plat_chaudDao;
 
+/* Méthodes pour les plats chauds */
 
 public class Plat_chaudDaoImpl implements Plat_chaudDao {
 
@@ -35,6 +36,9 @@ public class Plat_chaudDaoImpl implements Plat_chaudDao {
 
 	@Override
 	public Plat_chaud getPlat_chaud(int id) {
+		
+		/* Cette méthode permet de sélectionner un plat chaud grâce à son Id */
+		
 		Plat_chaud plat_chaud = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -54,6 +58,8 @@ public class Plat_chaudDaoImpl implements Plat_chaudDao {
 
 	@Override
 	public Plat_chaud ajouterPlat_chaud(Plat_chaud plat_chaud) {
+		
+		/* Cette méthode permet d'ajouter un plat chaud, elle est utilisée pour la carte de la Cafet */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -87,6 +93,8 @@ public class Plat_chaudDaoImpl implements Plat_chaudDao {
 	@Override
 	public void supprimerPlat_chaud(int id) {
 		
+		/* Cette méthode permet de supprimer un plat chaud, elle est utilisée pour la carte de la Cafet */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `plat_chaud` WHERE `id`=?");
@@ -102,6 +110,8 @@ public class Plat_chaudDaoImpl implements Plat_chaudDao {
 
 	@Override
 	public void majPlat_chaud(Plat_chaud plat_chaud) {
+		
+		/* Cette méthode permet de modifier un plat chaud, elle est utilisée pour la carte de la Cafet */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

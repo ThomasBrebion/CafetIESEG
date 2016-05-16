@@ -16,10 +16,15 @@ import org.joda.time.Instant;
 import Entities.Produits;
 import dao.ProduitsDao;
 
+/* Méthode pour les produits */
+
 public class ProduitsDaoImpl implements ProduitsDao {
 	
 	@Override
 	public List<Produits> listerProduits() {
+		
+		/* Cette méthode permet de lister les produits dans l'espace privé */
+		
 		List<Produits> listeDeProduits = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -43,6 +48,9 @@ public class ProduitsDaoImpl implements ProduitsDao {
 
 	@Override
 	public Produits getProduit(Integer id) {
+		
+		/* Cette méthode permet de sélectionner les produits en fonction de leurs Id */
+		
 		Produits produits = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -63,6 +71,8 @@ public class ProduitsDaoImpl implements ProduitsDao {
 
 	@Override
 	public Produits ajouterProduit(Produits produits) {
+		
+		/* Cette méthode permet de d'ajouter un produit, elle est utilisée pour l'espace privé */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -89,6 +99,8 @@ public class ProduitsDaoImpl implements ProduitsDao {
 	@Override
 	public void supprimerProduit(int id) {
 		
+		/* Cette méthode permet de dsupprimer un produit, elle est utilisée pour l'espace privé */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `produits` WHERE `id`=?");
@@ -103,6 +115,8 @@ public class ProduitsDaoImpl implements ProduitsDao {
 	
 	@Override
 	public void majProduit(Produits produit) {
+		
+		/* Cette méthode permet de modifier un produit, elle est utilisée pour l'espace privé */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

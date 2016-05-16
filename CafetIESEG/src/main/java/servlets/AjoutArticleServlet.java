@@ -48,6 +48,7 @@ public class AjoutArticleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		/*Récuperation des paramètres*/
 		String sTitre = request.getParameter("titre");
 		String sAuteur = request.getParameter("auteur");
 		String sText = request.getParameter("text");
@@ -55,6 +56,8 @@ public class AjoutArticleServlet extends HttpServlet {
 		int j = Ensemble.getInstance().listerArticles().size();
 				
 		request.setAttribute("message", "");
+		
+		/*On vérifie qu'il ne s'agit pas d'un titre qui existe déjà*/
 		boolean Equal = false;
 		for (int k=0;k<j;k++){
 			if(Ensemble.getInstance().listerArticles().get(k).getTitre().equals(sTitre))
@@ -64,8 +67,9 @@ public class AjoutArticleServlet extends HttpServlet {
 		}
 		
 		if(j!=0){
+			/*S'il y a déjà des articles dans la bdd*/
 			int lastId = Ensemble.getInstance().listerArticles().get(j-1).getId();
-			
+			/*Champs non nuls*/
 		if (this.isNullOrEmpty(sTitre) || this.isNullOrEmpty(sAuteur) || this.isNullOrEmpty(sText)) {		
 			request.setAttribute("message", "Un des champs du formulaire n'a pas été bien renseigné");		
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutArticle.jsp");	
@@ -80,6 +84,7 @@ public class AjoutArticleServlet extends HttpServlet {
 		e.printStackTrace();
 	}
 			} else if(Equal==true){		
+				/*Si le titre existe déjà*/
 			request.setAttribute("message", "Cet article existe déjà !");		
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutArticle.jsp");	
 			try {
@@ -94,6 +99,7 @@ public class AjoutArticleServlet extends HttpServlet {
 	}
 	} else {
 			try{
+				/*Ajout de l'article avec l'id du dernier article +1*/
 				Article nouvelArticle = new Article(lastId+1,sText, sAuteur, sTitre);
 				Ensemble.getInstance().ajouterArticle(nouvelArticle);
 				request.setAttribute("message", "Article ajouté !");			
@@ -111,6 +117,7 @@ public class AjoutArticleServlet extends HttpServlet {
 		}
 		}
 		else {
+			/*S'il n'y a pas d'articles dans la bdd*/
 			if (this.isNullOrEmpty(sTitre) || this.isNullOrEmpty(sAuteur) || this.isNullOrEmpty(sText)) {		
 				request.setAttribute("message", "Un des champs du formulaire n'a pas été bien renseigné");		
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutArticle.jsp");	
@@ -139,6 +146,7 @@ public class AjoutArticleServlet extends HttpServlet {
 		}
 		} else {
 				try{
+					/*Id à 1 car il s'agit du premier article ajouté à la bdd*/
 					Article nouvelArticle = new Article(1,sText, sAuteur, sTitre);
 					Ensemble.getInstance().ajouterArticle(nouvelArticle);
 					request.setAttribute("message", "Article ajouté !");			

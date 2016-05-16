@@ -11,9 +11,12 @@ import java.util.List;
 import Entities.Boissons;
 import dao.BoissonsDao;
 
+/* Méthodes pour les articles */
 
 public class BoissonDaoImpl implements BoissonsDao {
-
+	
+	/* Cette méthode permet de lister toutes les boissons, elle est utilisée pour la carte de la Cafet */
+	
 	@Override
 	public List<Boissons> listerBoissons() {
 		List<Boissons> listeDeBoisson = new ArrayList<>();
@@ -35,6 +38,9 @@ public class BoissonDaoImpl implements BoissonsDao {
 
 	@Override
 	public Boissons getBoissons(int id) {
+		
+		/* Cette méthode permet de sélectionner une boisson grâce à son ID */
+		
 		Boissons boisson = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -55,6 +61,8 @@ public class BoissonDaoImpl implements BoissonsDao {
 	@Override
 	public Boissons ajouterBoissons(Boissons boisson) {
 		
+		/* Cette méthode permet d'ajouter une boisson, elle est utilisée pour la carte de la Cafet */
+		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `boissons`(`nom`,`prix`,`id`)VALUES(?,?,?);", Statement.RETURN_GENERATED_KEYS);
@@ -74,6 +82,8 @@ public class BoissonDaoImpl implements BoissonsDao {
 	@Override
 	public void supprimerBoissons(int id) {
 		
+		/* Cette méthode permet de supprimer une boisson, elle est utilisée pour la carte de la Cafet */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `boissons` WHERE `id`=?");
@@ -90,6 +100,8 @@ public class BoissonDaoImpl implements BoissonsDao {
 
 	@Override
 	public void majBoissons(Boissons boissons) {
+		
+		/* Cette méthode permet de modifier une boisson, elle est utilisée pour la carte de la Cafet */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

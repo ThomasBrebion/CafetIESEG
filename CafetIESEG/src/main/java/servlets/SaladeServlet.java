@@ -21,6 +21,7 @@ public class SaladeServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des salades et mise en attribut*/
 		List<Salades> salades = Ensemble.getInstance().listerSalades();
 		request.setAttribute("listeSalades", salades);
 

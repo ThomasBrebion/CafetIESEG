@@ -11,11 +11,15 @@ import java.util.List;
 import Entities.Salades;
 import dao.SaladesDao;
 
+/* Méthode pour les salades */
 
 public class SaladeDaoImpl implements SaladesDao {
 
 	@Override
 	public List<Salades> listerSalades() {
+		
+		/* Cette méthode permet de lister toutes les salades dans la carte de la Cafet */
+		
 		List<Salades> listeDeSalades = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -35,6 +39,9 @@ public class SaladeDaoImpl implements SaladesDao {
 
 	@Override
 	public Salades getSalade(int id) {
+		
+		/* Cette méthode permet de sélectionner une salade en fonction de son id */
+		
 		Salades salades = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -54,6 +61,8 @@ public class SaladeDaoImpl implements SaladesDao {
 
 	@Override
 	public Salades ajouterSalade(Salades salade) {
+		
+		/* Cette méthode permet d'ajouter une salade dans la carte de la cafet */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -87,6 +96,8 @@ public class SaladeDaoImpl implements SaladesDao {
 	@Override
 	public void supprimerSalade(int id) {
 		
+		/* Cette méthode permet de supprimer une salade dans la carte de la Cafet */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `salade` WHERE `id`=?");
@@ -102,6 +113,8 @@ public class SaladeDaoImpl implements SaladesDao {
 
 	@Override
 	public void majSalade(Salades salade) {
+		
+		/* Cette méthode permet de modifier une salade dans la carte de la Cafet */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

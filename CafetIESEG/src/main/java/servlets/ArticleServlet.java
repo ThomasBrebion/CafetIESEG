@@ -20,6 +20,7 @@ public class ArticleServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Recuperation des parametres et mise en attribut*/
 		try {
 			Integer id = Integer.parseInt(request.getParameter("id"));
 			Article article = Ensemble.getInstance().getArticle(id);

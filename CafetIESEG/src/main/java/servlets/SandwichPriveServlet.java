@@ -21,6 +21,7 @@ public class SandwichPriveServlet extends GenericServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
+		/*Listing des sandwichs et mise en attribut*/		
 		List<Sandwich> sandwichs = Ensemble.getInstance().listerSandwichs();
 		request.setAttribute("listeSandwichs", sandwichs);
 

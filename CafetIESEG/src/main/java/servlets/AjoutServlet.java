@@ -30,7 +30,8 @@ public class AjoutServlet extends GenericServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
+		/*Récuperation des paramètres*/
 		String nom = request.getParameter("nom2");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,19 +51,22 @@ public class AjoutServlet extends GenericServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int j = Ensemble.getInstance().listerPlat_chauds().size();
+		int j = Ensemble.getInstance().listerProduits().size();
 				
 		request.setAttribute("messageErreur0", "");
+		
+		/*On vérifie qu'il ne s'agit pas d'un nom qui existe déjà*/
 		boolean Equal = false;
 		for (int k=0;k<j;k++){
-			if(Ensemble.getInstance().listerPlat_chauds().get(k).getNom().equals(nom))
+			if(Ensemble.getInstance().listerProduits().get(k).getNom().equals(nom))
 			{
 				Equal = true;
 			}
 		}
 		
 		if(j!=0){
-			int lastId = Ensemble.getInstance().listerPlat_chauds().size();
+			/*S'il y a déjà des produits dans la bdd*/
+			int lastId = Ensemble.getInstance().listerProduits().size();
 			
 		if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {		
 			request.setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");		
@@ -78,6 +82,7 @@ public class AjoutServlet extends GenericServlet {
 		e.printStackTrace();
 	}
 			} else if(Equal==true){		
+				/*Si le nom existe déjà*/
 			request.setAttribute("messageErreur0", "Ce produit existe déjà !");		
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
 			try {
@@ -92,6 +97,7 @@ public class AjoutServlet extends GenericServlet {
 	}
 	} else {
 			try{
+				/*Ajout du produit avec l'id du dernier produit +1*/
 				Produits nouvelProduit = new Produits(lastId+1,nom, quantite, date, prix);
 				Ensemble.getInstance().ajouterProduit(nouvelProduit);
 				request.setAttribute("messageErreur0", "Produit ajouté !");			
@@ -109,6 +115,7 @@ public class AjoutServlet extends GenericServlet {
 		}
 		}
 		else {
+			/*S'il n'y a pas de produits dans la bdd*/
 			if (this.isNullOrEmpty(nom) || date == null || quantite == null || prix == null) {		
 				request.setAttribute("messageErreur0", "Un des champs du formulaire n'a pas été bien renseigné");		
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajout.jsp");	
@@ -137,6 +144,7 @@ public class AjoutServlet extends GenericServlet {
 		}
 		} else {
 				try{
+					/*Id à 1 car il s'agit du premier produit ajouté à la bdd*/
 					Produits nouvelProduit = new Produits(1,nom, quantite, date, prix);
 					Ensemble.getInstance().ajouterProduit(nouvelProduit);
 					request.setAttribute("messageErreur0", "Produit ajouté !");			

@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un sandwich et méthodes pour récupérer les propriétés */
+
 public class Sandwich {
 
 	private String nom;

@@ -1,5 +1,7 @@
 package Entities;
 
+/* Propriétés d'un plat et méthodes pour récupérer les propriétés */
+
 public class Plat {
 
 	private String nom;

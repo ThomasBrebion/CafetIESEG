@@ -66,6 +66,7 @@ public class ModifierGrandDessertServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*Recuperation des parametres du formulaire*/
 		System.out.println(request.getParameter("id"));
 		Integer sId = Integer.parseInt(request.getParameter("id"));
 		String sNom = request.getParameter("nom");
@@ -73,6 +74,7 @@ public class ModifierGrandDessertServlet extends HttpServlet {
 		
 		
 		try {
+			/*Mise à jour*/
 			Grand_dessert grand_dessert = new Grand_dessert(sNom, sPrix,sId);
 			Ensemble.getInstance().majGrand_dessert(grand_dessert);
 			request.setAttribute("message", "Grand dessert mis a jour ! / Grand dessert updated !");			

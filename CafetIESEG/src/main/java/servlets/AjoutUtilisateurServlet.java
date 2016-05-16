@@ -48,12 +48,15 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		/*Récuperation des paramètres*/
 		String sMail = request.getParameter("mail");
 		String sMdp = request.getParameter("mdp");
 		
 		int j = Ensemble.getInstance().listerUtilisateurs().size();
 				
 		request.setAttribute("message", "");
+		
+		/*On vérifie qu'il ne s'agit pas d'un mail qui existe déjà*/
 		boolean Equal = false;
 		for (int k=0;k<j;k++){
 			if(Ensemble.getInstance().listerUtilisateurs().get(k).getMail().equals(sMail))
@@ -63,6 +66,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 		}
 		
 		if(j!=0){
+			/*S'il y a déjà des utilisateurs dans la bdd*/
 			int lastId = Ensemble.getInstance().listerUtilisateurs().get(j-1).getId();
 			
 		if (this.isNullOrEmpty(sMail) || this.isNullOrEmpty(sMdp)) {		
@@ -79,6 +83,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 		e.printStackTrace();
 	}
 			} else if(Equal==true){		
+				/*Si le mail existe déjà*/
 			request.setAttribute("message", "Cet utilisateur existe déjà !");		
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutUtilisateur.jsp");	
 			try {
@@ -93,6 +98,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 	}
 	} else {
 			try{
+				/*Ajout de l'utilisateur avec l'id du dernier utilisateur +1*/
 				Utilisateur nouvelUtilisateur = new Utilisateur(sMail,sMdp, lastId+1);
 				Ensemble.getInstance().ajouterUtilisateur(nouvelUtilisateur);
 				request.setAttribute("message", "Utilisateur ajouté !");			
@@ -110,6 +116,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 		}
 		}
 		else {
+			/*S'il n'y a pas de'utilisateurs dans la bdd*/
 			if (this.isNullOrEmpty(sMail) || this.isNullOrEmpty(sMdp)) {		
 				request.setAttribute("message", "Un des champs du formulaire n'a pas été bien renseigné");		
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/ajoutUtilisateur.jsp");	
@@ -138,6 +145,7 @@ public class AjoutUtilisateurServlet extends HttpServlet {
 		}
 		} else {
 				try{
+					/*Id à 1 car il s'agit du premier utilisateur ajouté à la bdd*/
 					Utilisateur nouvelUtilisateur = new Utilisateur(sMail,sMdp,1);
 					Ensemble.getInstance().ajouterUtilisateur(nouvelUtilisateur);
 					request.setAttribute("message", "Utilisateur ajouté !");			

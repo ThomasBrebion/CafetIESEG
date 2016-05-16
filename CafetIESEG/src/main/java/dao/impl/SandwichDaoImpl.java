@@ -11,11 +11,15 @@ import java.util.List;
 import Entities.Sandwich;
 import dao.SandwichDao;
 
+/* Méthodes pour les sandwichs */
 
 public class SandwichDaoImpl implements SandwichDao {
 
 	@Override
 	public List<Sandwich> listerSandwichs() {
+		
+		/* Cette méthode permet de lister tous les sandwichs dans la carte de la Cafet */
+		
 		List<Sandwich> listeDeSandwich = new ArrayList<>();
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -35,6 +39,9 @@ public class SandwichDaoImpl implements SandwichDao {
 
 	@Override
 	public Sandwich getSandwich(int id) {
+		
+		/* Cette méthode permet de sélectionner un sandwich en fonction de son Id */
+		
 		Sandwich sandwich = null;
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -54,6 +61,8 @@ public class SandwichDaoImpl implements SandwichDao {
 
 	@Override
 	public Sandwich ajouterSandwich(Sandwich sandwich) {
+		
+		/* Cette méthode permet d'ajouter une salade dans la carte de la Cafet */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -88,6 +97,8 @@ public class SandwichDaoImpl implements SandwichDao {
 	@Override
 	public void supprimerSandwich(int id) {
 		
+		/* Cette méthode permet de supprimer une salade dans la carte de la Cafet */
+		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			PreparedStatement stmt = connection.prepareStatement("DELETE FROM `sandwich` WHERE `id`=?");
@@ -103,6 +114,8 @@ public class SandwichDaoImpl implements SandwichDao {
 
 	@Override
 	public void majSandwich(Sandwich sandwich) {
+		
+		/* Cette méthode permet de modifier une salade dans la carte de la Cafet */
 		
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();

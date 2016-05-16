@@ -1,8 +1,10 @@
 package dao;
 
 import java.util.List;
-
 import Entities.Petit_dessert;
+
+/* Interface avec toutes les méthodes utilisée pour les petits desserts */
+
 
 public interface Petit_dessertDao {
 	public List<Petit_dessert> listerPetit_dessert();
